@@ -129,7 +129,7 @@
             <button
                 x-on:click="sidebarToggler"
                 class="text-admin-dark text-2xl ml-auto lg:order-first">
-                <span class="bi bi-list"></span>
+                <x-admin.icon name="list" />
             </button>
         </div>
         {{-- /topbar --}}

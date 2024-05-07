@@ -33,6 +33,6 @@
 @if ($show)
     <a class="{{ implode(' ', $styles) }}"
         href="{{ $href }}" {{ $attributes }}>
-        <span class="bi bi-{{ $item['icon'] }} mr-3"></span><span>{{ $item['label'] }}</span>
+        <x-admin.icon name="{{ $item['icon'] }}" class="mr-2" /><span>{{ $item['label'] }}</span>
     </a>
 @endif
