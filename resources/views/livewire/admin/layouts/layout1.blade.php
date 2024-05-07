@@ -10,7 +10,32 @@
     @vite(['resources/js/admin/app.js', 'resources/css/admin/app.css'])
 </head>
 
-<body class="bg-admin-light flex">
+<body
+    x-data="{
+        desktopWidth: 1024,
+        showSidebar: false,
+
+        init() {
+            $nextTick(() => {
+                if (window.innerWidth >= this.desktopWidth) {
+                    this.showSidebar = true;
+                }
+
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth >= this.desktopWidth && !this.showSidebar) {
+                        this.showSidebar = true;
+                    } else if (window.innerWidth < this.desktopWidth && this.showSidebar) {
+                        this.showSidebar = false;
+                    }
+                });
+            });
+        },
+
+        sidebarToggler() {
+            this.showSidebar = !this.showSidebar;
+        }
+    }"
+    class="bg-admin-light flex">
 
     @php
         $sidebarNavs = [
@@ -63,7 +88,9 @@
 
     {{-- aside --}}
     <aside
-        class="bg-admin-sidebar text-admin-light w-[275px] h-screen">
+        x-show="showSidebar"
+
+        class="bg-admin-sidebar text-admin-light w-3/4 sm:w-[275px] h-screen fixed lg:relative" style="display: none;">
 
         {{-- header --}}
         <header class="w-full h-[60px] px-10 flex items-center justify-start">
@@ -86,11 +113,18 @@
 
         {{-- topbar --}}
         <div class="bg-transparent w-full h-[60px] flex items-center">
+            <nav></nav>
+
+            <button
+                x-on:click="sidebarToggler"
+                class="text-admin-dark text-2xl ml-auto lg:order-first">
+                <span class="bi bi-list"></span>
+            </button>
         </div>
         {{-- /topbar --}}
 
         {{-- content --}}
-        <div class="bg-white px-5 w-full" style="height: calc(100% - (60px + 0px)); overflow-y:auto;">
+        <div class="bg-white px-5 w-full" style="height: calc(100% - (60px + 0px)); overflow-y: auto;">
             {{ $slot }}
         </div>
         {{-- /content --}}
