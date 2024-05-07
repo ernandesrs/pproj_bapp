@@ -124,7 +124,7 @@
         {{-- /topbar --}}
 
         {{-- content --}}
-        <div class="bg-white px-5 w-full" style="height: calc(100% - (60px + 0px)); overflow-y: auto;">
+        <div class="w-full" style="height: calc(100% - (60px + 0px)); overflow-y: auto;">
             {{ $slot }}
         </div>
         {{-- /content --}}
