@@ -100,11 +100,18 @@
         </header>
 
         {{-- navigations --}}
-        <div class="w-full" style="height: calc(100% - 60px); overflow-y: auto;">
-            @foreach ($sidebarNavs as $sidebarNav)
-                <x-admin.layout.sidebar.nav
-                    :nav="$sidebarNav" />
-            @endforeach
+        <div class="w-full flex flex-col" style="height: calc(100% - 60px); overflow-y: auto;">
+            <div>
+                @foreach ($sidebarNavs as $sidebarNav)
+                    <x-admin.layout.sidebar.nav
+                        :nav="$sidebarNav" />
+                @endforeach
+            </div>
+
+            {{-- nav end --}}
+            <div class="mt-auto">
+            </div>
+            {{-- /nav end --}}
         </div>
         {{-- /navigations --}}
 
