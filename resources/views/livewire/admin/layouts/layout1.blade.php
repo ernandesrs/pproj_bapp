@@ -28,7 +28,29 @@
                 [
                     'label' => 'Users',
                     'icon' => 'people-fill',
-                    'href' => '#',
+                    'activeIn' => ['admin.users.index', 'admin.users.create', 'admin.users.edit'],
+                    'items' => [
+                        [
+                            'label' => 'List all',
+                            'icon' => 'list-nested',
+                            'href' => '#',
+                            'route' => [
+                                'name' => 'admin.users.index',
+                            ],
+                            'activeIn' => ['admin.users.index'],
+                            'permissions' => null,
+                        ],
+                        [
+                            'label' => 'Create',
+                            'icon' => 'person-fill-add',
+                            'href' => '#',
+                            'route' => [
+                                'name' => 'admin.users.create',
+                            ],
+                            'activeIn' => ['admin.users.create'],
+                            'permissions' => null,
+                        ],
+                    ],
                 ],
                 [
                     'label' => 'Roles',
@@ -52,14 +74,6 @@
 
         {{-- navigations --}}
         <div class="w-full" style="height: calc(100% - 60px); overflow-y: auto;">
-            @foreach ($sidebarNavs as $nav)
-                <x-admin.layout.sidebar-nav>
-                    @foreach ($nav as $navItem)
-                        <x-admin.layout.sidebar-nav-item
-                            :nav-item="$navItem" />
-                    @endforeach
-                </x-admin.layout.sidebar-nav>
-            @endforeach
         </div>
         {{-- /navigations --}}
 
@@ -72,7 +86,6 @@
 
         {{-- topbar --}}
         <div class="bg-transparent w-full h-[60px] flex items-center">
-            a
         </div>
         {{-- /topbar --}}
 
