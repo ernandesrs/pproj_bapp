@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{{ $title ?? 'Page Title' }}</title>
+
+    @vite(['resources/js/admin/app.js', 'resources/css/admin/app.css'])
 </head>
 
 <body>

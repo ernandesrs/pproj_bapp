@@ -1,3 +1,3 @@
-<div class="text-xl">
+<div class="text-xl text-admin-primary">
     Admin home
 </div>
