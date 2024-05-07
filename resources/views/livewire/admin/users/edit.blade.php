@@ -1,3 +1,5 @@
-<div>
-    {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
-</div>
+<x-admin.layout.page.base>
+    <p>
+        EDIT
+    </p>
+</x-admin.layout.page.base>

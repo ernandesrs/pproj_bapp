@@ -1,2 +1,5 @@
-<div class="text-xl text-admin-primary">
-</div>
+<x-admin.layout.page.base>
+    <p>
+        DASHBOARD
+    </p>
+</x-admin.layout.page.base>
