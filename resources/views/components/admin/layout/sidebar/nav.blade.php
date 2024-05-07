@@ -6,30 +6,43 @@
     $styles = [];
 @endphp
 
-@foreach ($nav as $navLink)
-    <ul class="{{ implode(' ', $styles) }}">
+<ul class="{{ implode(' ', $styles) }}">
+    @foreach ($nav as $navLink)
         @if ($navLink['items'] ?? false)
             @php
                 $id = uniqid();
-                $active = in_array(\Route::currentRouteName(), $item['activeIn'] ?? []);
+                $active = in_array(\Route::currentRouteName(), $navLink['activeIn'] ?? []);
             @endphp
-            <li>
+            <li
+                x-data="{
+                    ...{{ json_encode([
+                        'showSubmenu' => $active,
+                    ]) }}
+                }">
                 <x-admin.layout.sidebar.nav-item
-                    :item="$navLink"
-                    target="#{{ $id }}" />
+                    x-on:click.prevent="showSubmenu=!showSubmenu"
+                    :item="$navLink" />
 
-                <ul class="{{ implode(' ', ['ml-8 bg-admin-light bg-opacity-10'] + $styles) }}" id="{{ $id }}"
+                <ul
+                    x-show="showSubmenu"
+                    class="{{ implode(' ', ['ml-8 bg-admin-light bg-opacity-10'] + $styles) }}"
                     style="{{ $active ? '' : 'display:none;' }}">
                     @foreach ($navLink['items'] as $subnavLink)
-                        <x-admin.layout.sidebar.nav-item
-                            :item="$subnavLink"
-                            subitem />
+                        <li>
+                            <x-admin.layout.sidebar.nav-item
+                                wire:navigate
+                                :item="$subnavLink"
+                                subitem />
+                        </li>
                     @endforeach
                 </ul>
             </li>
         @else
-            <x-admin.layout.sidebar.nav-item
-                :item="$navLink" />
+            <li>
+                <x-admin.layout.sidebar.nav-item
+                    wire:navigate
+                    :item="$navLink" />
+            </li>
         @endif
-    </ul>
-@endforeach
+    @endforeach
+</ul>
