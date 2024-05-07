@@ -90,7 +90,7 @@
         {{-- /topbar --}}
 
         {{-- content --}}
-        <div class="bg-white px-5 w-full flex-1">
+        <div class="bg-white px-5 w-full" style="height: calc(100% - (60px + 0px)); overflow-y:auto;">
             {{ $slot }}
         </div>
         {{-- /content --}}
