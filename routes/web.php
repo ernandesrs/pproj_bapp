@@ -24,7 +24,7 @@ Route::group([
     'prefix' => 'admin'
 ], function () {
 
-    Route::get('/', \App\Livewire\Admin\Home::class);
+    Route::get('/', \App\Livewire\Admin\Home::class)->name('admin.home');
 
 });
 
@@ -40,6 +40,6 @@ Route::group([
     'prefix' => 'customer'
 ], function () {
 
-    Route::get('/', \App\Livewire\Customer\Home::class);
+    Route::get('/', \App\Livewire\Customer\Home::class)->name('customer.home');
 
 });
