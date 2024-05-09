@@ -13,21 +13,13 @@ class Home extends BaseAdmin
      */
     function page(): ?Page
     {
-        return (
-            new Page(
-                'blank',
-                'admin.home',
-                'Overview',
-                [
-                    [
-                        'label' => 'Overview',
-                        'icon' => 'app',
-                        'href' => route('admin.home')
-                    ]
-                ]
-            )
-        )
-            ->setLayout('admin.layouts.layout1')
+        return (new Page('blank', 'admin.home', 'Overview', [
+            [
+                'label' => 'Overview',
+                'icon' => 'app',
+                'href' => route('admin.home')
+            ]
+        ]))->setLayout('admin.layouts.layout1')
             ->setIcon('pie-chart-fill');
     }
 }
