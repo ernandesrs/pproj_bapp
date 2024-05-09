@@ -38,8 +38,8 @@ class AppDev extends Command
         // create super
         $super = User::create([
             'first_name' => 'Super',
-            'last_name' => 'Admin',
-            'username' => 'superadmin',
+            'last_name' => 'User',
+            'username' => 'superuser',
             'gender' => 'm',
             'photo' => null,
             'email' => 'super@mail.com',
@@ -49,6 +49,21 @@ class AppDev extends Command
         ]);
         $this->info('');
         $this->info('Super user created');
+
+        // create admin
+        $admin = User::create([
+            'first_name' => 'Admin',
+            'last_name' => 'User',
+            'username' => 'adminuser',
+            'gender' => 'm',
+            'photo' => null,
+            'email' => 'admin@mail.com',
+            'password' => \Hash::make('password'),
+            'email_verified_at' => now(),
+            'remember_token' => \Str::random(10),
+        ]);
+        $this->info('');
+        $this->info('Admin user created');
 
         $this->info('');
         $this->info('Runing seeders ');
