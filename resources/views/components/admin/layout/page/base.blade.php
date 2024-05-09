@@ -21,14 +21,11 @@
             @if ($this->page()->hasActions())
                 <div class="flex items-center ml-auto">
                     @foreach ($this->page()->getActions() as $action)
-                        <a {{ $action['external'] ? '' : 'wire:navigate' }}
-                            class="px-5 py-2 bg-admin-primary text-admin-light" href="{{ $action['href'] }}"
-                            target="_{{ $action['external'] ? 'blank' : 'self' }}">
-                            @isset($action['icon'])
-                                <x-admin.icon name="{{ $action['icon'] }}" class="mr-2" />
-                            @endisset
-                            <span>{{ $action['label'] ?? ($action['text'] ?? '') }}</span>
-                        </a>
+                        <x-admin.buttons.clickable
+                            prepend-icon="{{ $action['icon'] }}"
+                            label="{{ $action['label'] }}"
+                            href="{{ $action['href'] }}"
+                            color="{{ $action['color'] }}" />
                     @endforeach
                 </div>
             @endif

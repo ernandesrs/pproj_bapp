@@ -16,6 +16,6 @@ class Index extends BaseAdmin
                 'href' => route('admin.users.index')
             ]
         ]))->setIcon('people-fill')
-            ->setAction('Create user', route('admin.users.create'), 'person-fill-add', 'success', false);
+            ->setAction('Create user', route('admin.users.create'), 'person-fill-add', 'primary', false);
     }
 }
