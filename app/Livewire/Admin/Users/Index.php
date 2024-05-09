@@ -9,13 +9,13 @@ class Index extends BaseAdmin
 {
     function page(): Page|null
     {
-        return (new Page('admin.users.index', 'Users', [
+        return (new Page('list', 'admin.users.index', 'Users', [
             [
                 'label' => 'Users',
                 'icon' => 'people-fill',
                 'href' => route('admin.users.index')
             ]
-        ]))
-        ->setIcon('people-fill');
+        ]))->setIcon('people-fill')
+            ->setAction('Create user', route('admin.users.create'), 'person-fill-add', 'success', false);
     }
 }

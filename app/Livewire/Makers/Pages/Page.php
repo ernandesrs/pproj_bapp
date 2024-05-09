@@ -4,24 +4,71 @@ namespace App\Livewire\Makers\Pages;
 
 class Page
 {
+    /**
+     * Type
+     * Allows: blank, normal and list
+     *
+     * @var string
+     */
+    protected string $type = 'blank';
+
+    /**
+     * Layout name
+     *
+     * @var string|null
+     */
     protected ?string $layout = null;
+
+    /**
+     * View name
+     *
+     * @var string|null
+     */
     protected ?string $view = null;
+
+    /**
+     * Icon
+     *
+     * @var string|null
+     */
     protected ?string $icon = 'app';
+
+    /**
+     * Title
+     *
+     * @var string|null
+     */
     protected ?string $title = null;
+
+    /**
+     * Button actions
+     *
+     * @var array
+     */
+    protected array $actions = [];
+
+    /**
+     * Breadcrumb
+     *
+     * @var array
+     */
     protected array $breadcrumb = [];
 
     /**
      * Contructor
      *
+     * @param string $blank page type: blank, normal, list
      * @param string $view page livewire view name
      * @param string $title page title
      * @param array $breadcrumb page breadcrumb
      */
     function __construct(
+        string $type = 'blank',
         string $view,
         string $title,
         array $breadcrumb = []
     ) {
+        $this->type = $type;
         $this->view = $view;
         $this->title = $title;
         $this->breadcrumb = $breadcrumb;
@@ -34,6 +81,46 @@ class Page
      *
      *
      */
+
+    /**
+     * Get page type
+     *
+     * @return string
+     */
+    function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * Check if page type is blank
+     *
+     * @return bool
+     */
+    function typeIsBlank()
+    {
+        return $this->type == 'blank';
+    }
+
+    /**
+     * Check if page type is normal
+     *
+     * @return bool
+     */
+    function typeIsNormal()
+    {
+        return $this->type == 'normal';
+    }
+
+    /**
+     * Check if page type is list
+     *
+     * @return bool
+     */
+    function typeIsList()
+    {
+        return $this->type == 'list';
+    }
 
     /**
      * Get layout name
@@ -111,6 +198,37 @@ class Page
     }
 
     /**
+     * Get button actions
+     *
+     * @return array
+     */
+    function getActions(): array
+    {
+        return $this->actions;
+    }
+
+    /**
+     * Check if has button actions
+     *
+     * @return bool
+     */
+    function hasActions(): bool
+    {
+        return count($this->actions) > 0;
+    }
+
+    /**
+     * Getter
+     *
+     * @param string $key
+     * @return mixed
+     */
+    function __get(string $key)
+    {
+        return $this->$key ?? null;
+    }
+
+    /**
      *
      *
      * SETTERS
@@ -143,13 +261,20 @@ class Page
     }
 
     /**
-     * Getter
+     * Set page action
      *
-     * @param string $key
-     * @return mixed
+     * @param string $label
+     * @return Page
      */
-    function __get(string $key)
+    function setAction(string $label, string $href, ?string $icon = null, string $color = 'primary', bool $external = false)
     {
-        return $this->$key ?? null;
+        $this->actions[] = [
+            'label' => $label,
+            'href' => $href,
+            'icon' => $icon,
+            'color' => $color,
+            'external' => $external
+        ];
+        return $this;
     }
 }

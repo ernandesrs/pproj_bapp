@@ -15,6 +15,7 @@ class Home extends BaseAdmin
     {
         return (
             new Page(
+                'blank',
                 'admin.home',
                 'Overview',
                 [

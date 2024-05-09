@@ -9,7 +9,7 @@ class Create extends BaseAdmin
 {
     function page(): Page|null
     {
-        return (new Page('admin.users.create', 'Create', [
+        return (new Page('normal', 'admin.users.create', 'Create', [
             [
                 'label' => 'Users',
                 'icon' => 'people-fill',
@@ -20,8 +20,7 @@ class Create extends BaseAdmin
                 'icon' => 'person-check',
                 'href' => route('admin.users.create')
             ]
-        ]))
-            ->setIcon('person-fill-add');
-        ;
+        ]))->setIcon('person-fill-add')
+            ->setAction('Back to list', route('admin.users.index'), 'arrow-left', 'light', false);
     }
 }
