@@ -86,7 +86,7 @@
         @endif
     </a>
 @else
-    <button {{ $attributes->except(['href', 'target', 'title']) }}>
+    <button {{ $attributes->except(['href', 'target', 'title', 'wire:navigate']) }}>
         @if ($prependIcon)
             <x-admin.icon name="{{ $loading ? 'arrow-clockwise animate-spin inline-block' : $prependIcon }}"
                 class="mr-2 pointer-events-none" />
