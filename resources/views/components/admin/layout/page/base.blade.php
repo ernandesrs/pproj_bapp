@@ -4,7 +4,7 @@
         {{-- title --}}
         <div class="flex items-center text-xl text-admin-font-base">
             <x-admin.icon name="app" class="mr-2" />
-            <div class="font-semibold">Page Title</div>
+            <div class="font-semibold">{{ $this->page()->getTitle() }}</div>
         </div>
         {{-- /title --}}
 

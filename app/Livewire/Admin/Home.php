@@ -2,15 +2,30 @@
 
 namespace App\Livewire\Admin;
 
-use Livewire\Component;
+use App\Livewire\Makers\Pages\Page;
 
-class Home extends Component
+class Home extends BaseAdmin
 {
-    public function render()
+    /**
+     * Page
+     *
+     * @return Page|null
+     */
+    function page(): ?Page
     {
-        return view('livewire..admin.home')
-            ->layout('livewire..admin.layouts.layout1', [
-                'title' => 'Admin Overview'
-            ]);
+        return (
+            new Page(
+                'admin.home',
+                'Overview',
+                [
+                    [
+                        'label' => 'Overview',
+                        'icon' => 'app',
+                        'href' => route('admin.home')
+                    ]
+                ]
+            )
+        )
+            ->setLayout('admin.layouts.layout1');
     }
 }
