@@ -26,6 +26,7 @@ class Home extends BaseAdmin
                 ]
             )
         )
-            ->setLayout('admin.layouts.layout1');
+            ->setLayout('admin.layouts.layout1')
+            ->setIcon('pie-chart-fill');
     }
 }

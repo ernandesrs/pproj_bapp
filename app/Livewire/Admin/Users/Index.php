@@ -2,16 +2,20 @@
 
 namespace App\Livewire\Admin\Users;
 
-use Livewire\Component;
+use App\Livewire\Admin\BaseAdmin;
+use App\Livewire\Makers\Pages\Page;
 
-class Index extends Component
+class Index extends BaseAdmin
 {
-    public function render()
+    function page(): Page|null
     {
-        return view('livewire..admin.users.index')
-            ->layout('livewire..admin.layouts.layout1', [
-                'title' => 'Index'
-            ]);
-        ;
+        return (new Page('admin.users.index', 'Users', [
+            [
+                'label' => 'Users',
+                'icon' => 'people-fill',
+                'href' => route('admin.users.index')
+            ]
+        ]))
+        ->setIcon('people-fill');
     }
 }

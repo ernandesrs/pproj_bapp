@@ -3,7 +3,7 @@
     <div class="flex items-center mb-5">
         {{-- title --}}
         <div class="flex items-center text-xl text-admin-font-base">
-            <x-admin.icon name="app" class="mr-2" />
+            <x-admin.icon name="{{ $this->page()->getIcon() }}" class="mr-2" />
             <div class="font-semibold">{{ $this->page()->getTitle() }}</div>
         </div>
         {{-- /title --}}

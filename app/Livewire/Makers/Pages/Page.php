@@ -6,6 +6,7 @@ class Page
 {
     protected ?string $layout = null;
     protected ?string $view = null;
+    protected ?string $icon = 'app';
     protected ?string $title = null;
     protected array $breadcrumb = [];
 
@@ -52,6 +53,16 @@ class Page
     function getView(): string
     {
         return $this->view;
+    }
+
+    /**
+     * Get page icon
+     *
+     * @return string
+     */
+    function getIcon(): string
+    {
+        return $this->icon;
     }
 
     /**
@@ -116,6 +127,18 @@ class Page
     function setLayout(string $layout)
     {
         $this->layout = $layout;
+        return $this;
+    }
+
+    /**
+     * Set page icon
+     *
+     * @param string $icon
+     * @return Page
+     */
+    function setIcon(string $icon)
+    {
+        $this->icon = $icon;
         return $this;
     }
 

@@ -27,7 +27,7 @@ class BaseAdmin extends Component
         $this->validatePage();
 
         return view('livewire..' . $this->page()->getView())
-            ->layout('livewire..' . $this->page()->getLayout() ?? 'admin.layouts.layout1', [
+            ->layout('livewire..' . ((empty($this->page()->getLayout())) ? 'admin.layouts.layout1' : $this->page()->getLayout()), [
                 'title' => $this->page()->getTitleFromBreadcrumb()
             ]);
     }
