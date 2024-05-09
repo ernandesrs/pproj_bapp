@@ -16,12 +16,23 @@ Route::get('/', function () {
 /**
  *
  *
+ * AUTH ROUTES
+ *
+ *
+ */
+Route::get('/auth/login', \App\Livewire\Auth\Login::class)
+    ->middleware(['guest'])->name('auth.login');
+
+/**
+ *
+ *
  * ADMIN PANEL ROUTES
  *
  *
  */
 Route::group([
-    'prefix' => 'admin'
+    'prefix' => 'admin',
+    'middleware' => ['auth']
 ], function () {
 
     Route::get('/', \App\Livewire\Admin\Home::class)->name('admin.home');
@@ -50,7 +61,8 @@ Route::group([
  *
  */
 Route::group([
-    'prefix' => 'customer'
+    'prefix' => 'customer',
+    'middleware' => ['auth']
 ], function () {
 
     Route::get('/', \App\Livewire\Customer\Home::class)->name('customer.home');
