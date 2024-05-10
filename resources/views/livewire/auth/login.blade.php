@@ -23,6 +23,12 @@
             @endif
         </div>
 
+        <div class="basis-full flex items-center">
+            <input wire:model="data.remember" id="remember" class="w-5 h-5 bg-admin-light bg-opacity-45 border-admin-light"
+                type="checkbox" />
+            <label for="remember" class="ml-2">Remember-me!</label>
+        </div>
+
         <div class="basis-full flex items-center justify-center mt-2">
             <x-admin.buttons.clickable
                 wire:loading.remove

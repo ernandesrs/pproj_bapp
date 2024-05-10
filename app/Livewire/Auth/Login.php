@@ -14,7 +14,8 @@ class Login extends Component
      */
     public array $data = [
         'email' => null,
-        'password' => null
+        'password' => null,
+        'remember' => false
     ];
 
     /**
@@ -38,12 +39,13 @@ class Login extends Component
     {
         $validated = $this->validate([
             'data.email' => ['required', 'email', 'exists:users,email'],
-            'data.password' => ['required']
+            'data.password' => ['required'],
+            'data.remember' => ['boolean']
         ], [
             'data.email.exists' => 'Email notfound in our database.'
         ]);
 
-        if (\Auth::attempt(['email' => $validated['data']['email'], 'password' => $validated['data']['password']])) {
+        if (\Auth::attempt(['email' => $validated['data']['email'], 'password' => $validated['data']['password']], $validated['data']['remember'])) {
             $this->redirect(route('admin.home'));
         } else {
             $this->addError('data.email', 'Login fail: email or password invalid.');
