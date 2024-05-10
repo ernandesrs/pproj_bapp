@@ -49,7 +49,7 @@
         ],
     ];
     $styles = [
-        'border px-3 py-2 shadow hover:shadow-md duration-200',
+        'border px-6 py-2 shadow hover:shadow-md duration-200',
         $colors[$color][$variant] ?? $colors[$color]['filled'],
     ];
     $isLink = $attributes->has('href');
