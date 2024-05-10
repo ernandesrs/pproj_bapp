@@ -1,4 +1,5 @@
 <x-admin.form.base
+    submitTo="update"
     class="flex flex-wrap gap-y-6">
 
     <x-admin.form.input

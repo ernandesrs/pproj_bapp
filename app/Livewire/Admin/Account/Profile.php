@@ -51,6 +51,10 @@ class Profile extends Component
             'data.password' => ['string', 'confirmed']
         ]);
 
-        dump($validated['data']);
+        if (isset($validated['data']['password'])) {
+            $validated['data']['password'] = \Hash::make($validated['data']['password']);
+        }
+
+        $this->user->update($validated['data']);
     }
 }
