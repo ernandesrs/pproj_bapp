@@ -21,9 +21,23 @@
 
     <x-admin.form.input
         wire:model="data.gender"
-        type="text"
+        type="select"
         label="Gender"
-        class="basis-6/12 pl-3" />
+        class="basis-6/12 pl-3"
+        :options="[
+            [
+                'label' => 'None',
+                'value' => 'n',
+            ],
+            [
+                'label' => 'Female',
+                'value' => 'f',
+            ],
+            [
+                'label' => 'Male',
+                'value' => 'm',
+            ],
+        ]" />
 
     <x-admin.form.input
         wire:model="data.email"

@@ -34,4 +34,7 @@
             </button>
         @endif
     </div>
+    @if ($errors->has($attributes->get('wire:model')))
+        <x-admin.form.feedback color="danger" text="{{ implode('.', $errors->get($attributes->get('wire:model'))) }}" />
+    @endif
 </div>
