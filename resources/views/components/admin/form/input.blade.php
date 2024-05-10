@@ -6,7 +6,7 @@
 @php
     $id = $type . '_input_' . uniqid();
     $styles =
-        'shadow border border-admin-light px-4 py-2 w-full text-admin-font-light focus:outline-none focus:border-admin-font-light';
+        'shadow border border-admin-light px-4 py-2 w-full text-admin-font-light focus:outline-none focus:border-admin-font-light disabled:bg-admin-light disabled:bg-opacity-60 readonly:bg-admin-light readonly:bg-opacity-60';
 
     $attributes = $attributes->merge([
         'label' => $label,

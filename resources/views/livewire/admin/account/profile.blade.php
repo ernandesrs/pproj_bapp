@@ -26,6 +26,13 @@
         class="basis-6/12 pl-3" />
 
     <x-admin.form.input
+        wire:model="data.email"
+        type="text"
+        label="Email"
+        class="basis-full"
+        disabled />
+
+    <x-admin.form.input
         wire:model="data.password"
         type="password"
         label="Password"
