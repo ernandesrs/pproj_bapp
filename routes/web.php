@@ -50,6 +50,17 @@ Route::group([
 
     });
 
+    /**
+     * Account
+     */
+    Route::group([
+        'prefix' => 'account'
+    ], function () {
+
+        Route::get('/', \App\Livewire\Admin\Account\Account::class)->name('admin.account');
+
+    });
+
 });
 
 

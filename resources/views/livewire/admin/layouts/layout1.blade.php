@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{{ $title ?? 'Page Title' }}</title>
+    <title>Admin | {{ $title ?? 'Page Title' }}</title>
 
     @vite(['resources/js/admin/app.js', 'resources/css/admin/app.css'])
 </head>
@@ -84,6 +84,28 @@
                 ],
             ],
         ];
+
+        $sidebarEndNavs = [
+            [
+                [
+                    'label' => 'Account',
+                    'icon' => 'person-circle',
+                    'href' => '#',
+                    'route' => [
+                        'name' => 'admin.account',
+                    ],
+                    'activeIn' => ['admin.account'],
+                    'permissions' => null,
+                ],
+                [
+                    'label' => 'Settings',
+                    'icon' => 'gear-fill',
+                    'href' => '#',
+                    'activeIn' => [],
+                    'permissions' => null,
+                ],
+            ],
+        ];
     @endphp
 
     {{-- aside --}}
@@ -110,6 +132,10 @@
 
             {{-- nav end --}}
             <div class="mt-auto">
+                @foreach ($sidebarEndNavs as $sidebarNav)
+                    <x-admin.layout.sidebar.nav
+                        :nav="$sidebarNav" />
+                @endforeach
             </div>
             {{-- /nav end --}}
         </div>
