@@ -162,6 +162,8 @@
 
         {{-- content --}}
         <div class="w-full" style="height: calc(100% - (60px + 0px)); overflow-y: auto;">
+            <x-admin.feedback />
+
             {{ $slot }}
         </div>
         {{-- /content --}}
