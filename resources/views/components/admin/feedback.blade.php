@@ -40,11 +40,48 @@
 
 <div
     x-data="{
-        ...{{ json_encode([...$data, 'colors' => $colors, 'showFeedback' => !empty($data['text'])]) }},
+        ...{{ json_encode([...$data, 'colors' => $colors, 'showFeedback' => false]) }},
+
+        init() {
+            $nextTick(() => {
+                if (this.text?.length > 0) {
+                    this.method_showFeedback();
+                }
+            });
+        },
+        method_showFeedback() {
+            this.showFeedback = true;
+
+            {{-- bounce effect --}}
+            setTimeout(() => {
+                $el.classList.add('animate-bounce-element');
+            }, 200);
+        },
+        method_closeFeedback() {
+            this.showFeedback = false;
+            setTimeout(() => {
+                this.method_clearFeedback();
+            }, 100);
+        },
+        method_clearFeedback() {
+            this.title = null;
+            this.text = null;
+            this.type = 'default';
+            this.flash = false;
+            this.actions = [];
+        }
     }"
     x-show="showFeedback"
+    x-transition:enter="transition ease-out duration-200"
+    x-transition:enter-start="translate-x-1/4 opacity-0"
+    x-transition:enter-end="translate-x-0 opacity-100"
+    x-transition:leave="transition ease-in duration-100"
+    x-transition:leave-start="translate-x-0 opacity-100"
+    x-transition:leave-end="translate-x-1/4 opacity-0"
 
-    class="bg-white shadow-md fixed top-5 right-5 max-w-[450px] z-50" style="width: calc(100% - 32px);display: none">
+    class="bg-white shadow-md fixed top-5 right-5 max-w-[450px] z-50" style="width: calc(100% - 32px); display: none;">
+
+    {{-- content --}}
     <div class="flex items-start px-4 py-3 border-l-8 border-t border-r border-b border-opacity-75"
         :class="colors[type]">
 
@@ -90,9 +127,13 @@
         {{-- /title/text --}}
 
         {{-- close --}}
-        <button class="px-3">
+        <button
+            x-on:click="method_closeFeedback"
+            class="px-3">
             <x-admin.icon name="x-circle" class="text-xl text-admin-danger" />
         </button>
         {{-- /close --}}
     </div>
+    {{-- /content --}}
+
 </div>

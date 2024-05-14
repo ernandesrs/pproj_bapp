@@ -56,8 +56,7 @@ class Profile extends Component
         }
 
         (new \App\Livewire\Helpers\Feedback())
-            ->error('This is a feedback example.')
-            ->addAction('Ok! Back to home.', route('admin.home'))
+            ->info('Profile data updated.')
             ->flash();
 
         $this->redirect(route('admin.account'), true);

@@ -3,3 +3,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes bounceAnimation {
+
+    0%,
+    100% {
+        transform: translateX(-3px);
+    }
+
+    16.7%,
+    50%,
+    83.3% {
+        transform: translateX(3px);
+    }
+
+    33.3%,
+    66.7% {
+        transform: translateX(0);
+    }
+}
+
+
+.animate-bounce-element {
+    animation: bounceAnimation 0.3s ease-in-out backwards;
+}
