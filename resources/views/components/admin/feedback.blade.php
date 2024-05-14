@@ -25,6 +25,7 @@
     ];
 
     $data = [
+        'timer' => 3000,
         'flash' => false,
         'type' => $type,
         'title' => $title,
@@ -40,6 +41,10 @@
 
 <div
     x-data="{
+        timeLeft: 0,
+        timeLeftWidth: 0,
+        timerHandler: null,
+        timerLeftWidthHandler: null,
         ...{{ json_encode([...$data, 'colors' => $colors, 'showFeedback' => false]) }},
 
         init() {
@@ -55,6 +60,7 @@
             {{-- bounce effect --}}
             setTimeout(() => {
                 $el.classList.add('animate-bounce-element');
+                this.method_startTimer();
             }, 200);
         },
         method_closeFeedback() {
@@ -69,6 +75,40 @@
             this.type = 'default';
             this.flash = false;
             this.actions = [];
+            this.timeLeftWidth = this.timeLeft = 0;
+
+            if (this.timerHandler) {
+                clearInterval(this.timerHandler);
+                this.timerHandler = null;
+            }
+        },
+        method_startTimer() {
+            this.timerHandler = setInterval(() => {
+                if (this.timeLeft >= this.timer) {
+                    this.method_closeFeedback();
+                }
+
+                this.timeLeft += 1000;
+            }, 1000);
+
+            this.timerLeftWidthHandler = setInterval(() => {
+                if (this.timeLeftWidth < 100) {
+                    this.timeLeftWidth += (10 / (this.timer + 1000)) * 100;
+                }
+            }, 10);
+        },
+        method_pauseTimer() {
+            if (this.timerHandler) {
+                clearInterval(this.timerHandler);
+                this.timerHandler = null;
+                this.timeLeft = 0;
+            }
+
+            if (this.timerLeftWidthHandler) {
+                clearInterval(this.timerLeftWidthHandler);
+                this.timerLeftWidthHandler = null;
+                this.timeLeftWidth = 0;
+            }
         }
     }"
     x-show="showFeedback"
@@ -79,10 +119,14 @@
     x-transition:leave-start="translate-x-0 opacity-100"
     x-transition:leave-end="translate-x-1/4 opacity-0"
 
-    class="bg-white shadow-md fixed top-5 right-5 max-w-[450px] z-50" style="width: calc(100% - 32px); display: none;">
+    x-on:mouseenter="method_pauseTimer"
+    x-on:mouseleave="method_startTimer"
+
+    class="bg-white shadow-md fixed top-5 right-5 max-w-[450px] z-50 cursor-default"
+    style="width: calc(100% - 32px); display: none;">
 
     {{-- content --}}
-    <div class="flex items-start px-4 py-3 border-l-8 border-t border-r border-b border-opacity-75"
+    <div class="flex items-start px-4 py-3 border-l-8 border-t border-r border-b border-opacity-75 relative"
         :class="colors[type]">
 
         {{-- icon --}}
@@ -96,15 +140,19 @@
 
         {{-- title/text --}}
         <div class="ml-3 w-full">
+
+            {{-- title --}}
             <div
                 x-show="title"
                 x-text="title"
                 class="font-semibold text-lg"></div>
 
+            {{-- text --}}
             <div
                 x-text="text"
                 class="font-normal text-opacity-70"></div>
 
+            {{-- actions --}}
             <div
                 x-show="actions.length > 0"
                 class="pt-3 flex justify-start gap-x-1">
@@ -123,13 +171,18 @@
                         class="hover:text-opacity-100 hover:font-semibold duration-200"></a>
                 </template>
             </div>
+
+            {{-- loader/timer --}}
+            <div class="border-b-2 absolute left-0 border-opacity-75 bottom-0"
+                :style="'width:' + timeLeftWidth + '%'" :class="colors[type]">
+            </div>
         </div>
         {{-- /title/text --}}
 
         {{-- close --}}
         <button
             x-on:click="method_closeFeedback"
-            class="px-3">
+            class="">
             <x-admin.icon name="x-circle" class="text-xl text-admin-danger" />
         </button>
         {{-- /close --}}

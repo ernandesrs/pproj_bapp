@@ -6,6 +6,8 @@ class Feedback
 {
     static string $flashFeedbackKey = 'app_flash_feedback';
 
+    public int $timer = 3000;
+
     public bool $flash = false;
 
     public string $text;
@@ -110,7 +112,7 @@ class Feedback
      * @param string $label
      * @param string $href
      * @param bool $external
-     * @return feedback
+     * @return Feedback
      */
     function addAction(string $label, string $href, bool $external = false)
     {
@@ -119,6 +121,18 @@ class Feedback
             'href' => $href,
             'external' => $external
         ];
+        return $this;
+    }
+
+    /**
+     * Feedback timer to close
+     *
+     * @param integer $timer
+     * @return Feedback
+     */
+    function timer(int $timer = 3000)
+    {
+        $this->timer = $timer;
         return $this;
     }
 
@@ -144,6 +158,7 @@ class Feedback
         return [
             'flash' => $this->flash,
             'type' => $this->type,
+            'timer' => $this->timer,
             'title' => $this->title,
             'text' => $this->text,
             'actions' => $this->actions,
