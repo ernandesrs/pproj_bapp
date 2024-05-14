@@ -105,6 +105,24 @@ class Feedback
     }
 
     /**
+     * Add a feedback action
+     *
+     * @param string $label
+     * @param string $href
+     * @param bool $external
+     * @return feedback
+     */
+    function addAction(string $label, string $href, bool $external = false)
+    {
+        $this->actions[] = [
+            'label' => $label,
+            'href' => $href,
+            'external' => $external
+        ];
+        return $this;
+    }
+
+    /**
      * A flash feedback
      *
      * @return void

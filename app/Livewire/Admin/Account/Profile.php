@@ -55,7 +55,10 @@ class Profile extends Component
             $validated['data']['password'] = \Hash::make($validated['data']['password']);
         }
 
-        (new \App\Livewire\Helpers\Feedback())->error('This is a success feddback')->flash();
+        (new \App\Livewire\Helpers\Feedback())
+            ->error('This is a feedback example.')
+            ->addAction('Ok! Back to home.', route('admin.home'))
+            ->flash();
 
         $this->redirect(route('admin.account'), true);
 

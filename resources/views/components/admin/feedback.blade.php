@@ -40,7 +40,7 @@
 
 <div
     x-data="{
-        ...{{ json_encode([...$data, 'colors' => $colors, 'showFeedback' => !empty($data['text'])]) }}
+        ...{{ json_encode([...$data, 'colors' => $colors, 'showFeedback' => !empty($data['text'])]) }},
     }"
     x-show="showFeedback"
 
@@ -67,17 +67,25 @@
             <div
                 x-text="text"
                 class="font-normal text-opacity-70"></div>
-            @if ($actions)
-                <div class="pt-3 flex justify-start gap-x-1">
-                    @foreach ($actions as $action)
-                        <a {{ $action['external'] ? '' : 'wire:navigate' }}
-                            class="hover:text-opacity-100 hover:font-semibold duration-200"
-                            href="{{ $action['url'] ?? '#' }}">
-                            {{ $action['label'] }}
-                        </a>
-                    @endforeach
-                </div>
-            @endif
+
+            <div
+                x-show="actions.length > 0"
+                class="pt-3 flex justify-start gap-x-1">
+                <template x-for="action in actions.filter((fa) => fa.external)">
+                    <a
+                        :href="action.href"
+                        x-text="action.label"
+                        target="_blank"
+                        class="hover:text-opacity-100 hover:font-semibold duration-200"></a>
+                </template>
+                <template x-for="action in actions.filter((fa) => !fa.external)">
+                    <a
+                        wire:navigate
+                        :href="action.href"
+                        x-text="action.label"
+                        class="hover:text-opacity-100 hover:font-semibold duration-200"></a>
+                </template>
+            </div>
         </div>
         {{-- /title/text --}}
 
