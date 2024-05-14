@@ -55,6 +55,10 @@ class Profile extends Component
             $validated['data']['password'] = \Hash::make($validated['data']['password']);
         }
 
-        $this->user->update($validated['data']);
+        (new \App\Livewire\Helpers\Feedback())->error('This is a success feddback')->flash();
+
+        $this->redirect(route('admin.account'), true);
+
+        // $this->user->update($validated['data']);
     }
 }
