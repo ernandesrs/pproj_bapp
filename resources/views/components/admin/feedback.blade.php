@@ -1,14 +1,29 @@
 @props([
+    /**
+     * Feedback type
+     * Allows: default, success, danger, error, info, light
+     */
     'type' => 'default',
+
+    /**
+     * Feedback title
+     */
     'title' => null,
+
+    /**
+     * Feedback text
+     */
     'text' => null,
 
     /**
-     * Example of actions item
+     * Feedback actions:
+     *
+     * Allows: array of arrays, each array must contain the following keys
      * [
      *     'label' => 'Go to',
      *     'href' => '#',
-     *     'external' => false,
+     *     'external' => false, // when true, the link will open in a new tab,
+     *     'highlight' => true, // when true or false, default is true
      * ],
      */
     'actions' => [],
@@ -201,14 +216,16 @@
                         :href="action.href"
                         x-text="action.label"
                         target="_blank"
-                        class="hover:text-opacity-100 hover:font-semibold duration-200"></a>
+                        :class="colors[type] + ' ' + (action?.highlight === false ? '' : 'border')"
+                        class="px-3 hover:text-opacity-100 duration-200"></a>
                 </template>
                 <template x-for="action in actions.filter((fa) => !fa.external)">
                     <a
                         wire:navigate
                         :href="action.href"
                         x-text="action.label"
-                        class="hover:text-opacity-100 hover:font-semibold duration-200"></a>
+                        :class="colors[type] + ' ' + (action?.highlight === false ? '' : 'border')"
+                        class="px-3 hover:text-opacity-100 duration-200"></a>
                 </template>
             </div>
 
