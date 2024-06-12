@@ -58,14 +58,14 @@ class Profile extends Component
         if (!$this->user->update($validated['data'])) {
             (new \App\Helpers\Feedback())
                 ->error('Fail on udpate')
-                ->timer(2000)
+                ->timer(10000)
                 ->flash();
             return $this->redirect(route('admin.account'), true);
         }
 
         (new \App\Helpers\Feedback())
             ->success('Profile data updated.')
-            ->timer(2000)
+            ->timer(10000)
             ->dispatch($this);
     }
 }

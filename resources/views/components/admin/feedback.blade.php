@@ -49,23 +49,38 @@
 
         init() {
             $nextTick(() => {
-                if (this.text?.length > 0) {
+                if (this.method_hasFeedback()) {
                     this.method_showFeedback();
                 }
             });
         },
-        addFeedback(event) {
+        method_feedbackFromEvent(event) {
             const data = event.detail[0];
 
-            if (data.text?.length > 0) {
-                this.type = data.type;
-                this.title = data.title;
-                this.text = data.text;
-                this.timer = data.timer;
-                this.flash = data.flash;
+            if (this.method_hasAndShownFeedback()) {
+                {{-- hide the current feedback --}}
+                this.method_closeFeedback();
 
-                this.method_showFeedback();
+                {{-- wait for the close animation --}}
+                setTimeout(() => {
+                    this.method_setFeedbackData(data);
+                    this.method_showFeedback();
+                }, 250);
+            } else {
+                this.method_setFeedbackData(data);
+
+                {{-- just shows the new feedback --}}
+                if (this.method_hasFeedback()) {
+                    this.method_showFeedback();
+                }
             }
+        },
+        method_setFeedbackData(data) {
+            this.type = data.type;
+            this.title = data.title;
+            this.text = data.text;
+            this.timer = data.timer;
+            this.flash = data.flash;
         },
         method_showFeedback() {
             this.showFeedback = true;
@@ -78,22 +93,22 @@
         },
         method_closeFeedback() {
             this.showFeedback = false;
+
             setTimeout(() => {
                 this.method_clearFeedback();
             }, 100);
+
         },
         method_clearFeedback() {
-            this.title = null;
-            this.text = null;
+            this.title = this.text = null;
+            this.timeLeftWidth = this.timeLeft = 0;
             this.type = 'default';
             this.flash = false;
             this.actions = [];
-            this.timeLeftWidth = this.timeLeft = 0;
 
-            if (this.timerHandler) {
-                clearInterval(this.timerHandler);
-                this.timerHandler = null;
-            }
+            clearInterval(this.timerHandler);
+            clearInterval(this.timerLeftWidthHandler);
+            this.timerHandler = this.timerLeftWidthHandler = null;
         },
         method_startTimer() {
             this.timerHandler = setInterval(() => {
@@ -122,6 +137,12 @@
                 this.timerLeftWidthHandler = null;
                 this.timeLeftWidth = 0;
             }
+        },
+        method_hasFeedback() {
+            return this?.text && this.text.length > 0 ? true : false;
+        },
+        method_hasAndShownFeedback() {
+            return this.text && this.showFeedback;
         }
     }"
     x-show="showFeedback"
@@ -134,7 +155,7 @@
 
     x-on:mouseenter="method_pauseTimer"
     x-on:mouseleave="method_startTimer"
-    x-on:server_from_feedback.window="addFeedback"
+    x-on:server_from_feedback.window="method_feedbackFromEvent"
 
     class="bg-white shadow-md fixed top-5 right-5 max-w-[450px] z-50 cursor-default"
     style="width: calc(100% - 32px); display: none;">
