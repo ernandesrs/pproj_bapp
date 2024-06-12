@@ -94,6 +94,7 @@
         method_closeFeedback() {
             this.showFeedback = false;
 
+            {{-- wait for the closing animation --}}
             setTimeout(() => {
                 this.method_clearFeedback();
             }, 100);
@@ -111,6 +112,10 @@
             this.timerHandler = this.timerLeftWidthHandler = null;
         },
         method_startTimer() {
+            if (!this.method_hasAndShownFeedback()) {
+                return;
+            }
+
             this.timerHandler = setInterval(() => {
                 if (this.timeLeft >= this.timer) {
                     this.method_closeFeedback();
