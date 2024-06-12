@@ -54,6 +54,19 @@
                 }
             });
         },
+        addFeedback(event) {
+            const data = event.detail[0];
+
+            if (data.text?.length > 0) {
+                this.type = data.type;
+                this.title = data.title;
+                this.text = data.text;
+                this.timer = data.timer;
+                this.flash = data.flash;
+
+                this.method_showFeedback();
+            }
+        },
         method_showFeedback() {
             this.showFeedback = true;
 
@@ -121,6 +134,7 @@
 
     x-on:mouseenter="method_pauseTimer"
     x-on:mouseleave="method_startTimer"
+    x-on:server_from_feedback.window="addFeedback"
 
     class="bg-white shadow-md fixed top-5 right-5 max-w-[450px] z-50 cursor-default"
     style="width: calc(100% - 32px); display: none;">

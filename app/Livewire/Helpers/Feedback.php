@@ -149,6 +149,17 @@ class Feedback
     }
 
     /**
+     * Dispatch a event with alert data
+     *
+     * @param \Livewire\Component $component
+     * @return void
+     */
+    function dispatch(\Livewire\Component $component)
+    {
+        $component->dispatch('server_from_feedback', $this->toArray());
+    }
+
+    /**
      * To array
      *
      * @return array
