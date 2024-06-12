@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Helpers;
+namespace App\Helpers;
 
 class Feedback
 {

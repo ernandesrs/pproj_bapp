@@ -55,13 +55,17 @@ class Profile extends Component
             $validated['data']['password'] = \Hash::make($validated['data']['password']);
         }
 
-        (new \App\Livewire\Helpers\Feedback())
+        if (!$this->user->update($validated['data'])) {
+            (new \App\Helpers\Feedback())
+                ->error('Fail on udpate')
+                ->timer(2000)
+                ->flash();
+            return $this->redirect(route('admin.account'), true);
+        }
+
+        (new \App\Helpers\Feedback())
             ->success('Profile data updated.')
             ->timer(2000)
             ->dispatch($this);
-
-        // $this->redirect(route('admin.account'), true);
-
-        // $this->user->update($validated['data']);
     }
 }

@@ -32,7 +32,7 @@
         'text' => $text,
         'actions' => $actions,
     ];
-    $flash = \App\Livewire\Helpers\Feedback::get();
+    $flash = \App\Helpers\Feedback::get();
     if (empty($text) && $flash) {
         $data = $flash->toArray();
     }
