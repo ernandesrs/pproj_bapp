@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Makers\Pages;
 
 use App\Livewire\Makers\Pages\Page;
 use Livewire\Component;
 
-class BaseAdmin extends Component
+class PageBase extends Component
 {
     /**
      * \App\Livewire\Makers\Pages\Page instance
@@ -27,7 +27,7 @@ class BaseAdmin extends Component
         $this->validatePage();
 
         return view('livewire..' . $this->page()->getView())
-            ->layout('livewire..' . ((empty($this->page()->getLayout())) ? 'admin.layouts.layout1' : $this->page()->getLayout()), [
+            ->layout('livewire..' . ((empty($this->page()->getLayout())) ? 'layouts.layout1' : $this->page()->getLayout()), [
                 'title' => $this->page()->getTitleFromBreadcrumb()
             ]);
     }

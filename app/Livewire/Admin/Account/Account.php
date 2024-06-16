@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Admin\Account;
 
-use App\Livewire\Admin\BaseAdmin;
 use App\Livewire\Makers\Pages\Page;
+use App\Livewire\Makers\Pages\PageBase;
 
-class Account extends BaseAdmin
+class Account extends PageBase
 {
     function page(): Page|null
     {
@@ -15,6 +15,8 @@ class Account extends BaseAdmin
                 'href' => route('admin.account'),
                 'icon' => 'person-circle'
             ]
-        ]))->setIcon('person-circle');
+        ]))
+            ->setLayout('admin.layouts.layout1')
+            ->setIcon('person-circle');
     }
 }

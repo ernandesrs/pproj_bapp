@@ -2,10 +2,10 @@
 
 namespace App\Livewire\Admin\Users;
 
-use App\Livewire\Admin\BaseAdmin;
 use App\Livewire\Makers\Pages\Page;
+use App\Livewire\Makers\Pages\PageBase;
 
-class Index extends BaseAdmin
+class Index extends PageBase
 {
     function page(): Page|null
     {
@@ -15,7 +15,9 @@ class Index extends BaseAdmin
                 'icon' => 'people-fill',
                 'href' => route('admin.users.index')
             ]
-        ]))->setIcon('people-fill')
+        ]))
+            ->setLayout('admin.layouts.layout1')
+            ->setIcon('people-fill')
             ->setAction('Create user', route('admin.users.create'), 'person-fill-add', 'primary', false);
     }
 }

@@ -3,8 +3,9 @@
 namespace App\Livewire\Admin;
 
 use App\Livewire\Makers\Pages\Page;
+use App\Livewire\Makers\Pages\PageBase;
 
-class Home extends BaseAdmin
+class Home extends PageBase
 {
     /**
      * Page
