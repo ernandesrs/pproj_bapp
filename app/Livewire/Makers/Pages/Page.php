@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Makers\Pages;
 
+use App\Livewire\Makers\Breadcrumb;
+
 class Page
 {
     /**
@@ -50,9 +52,9 @@ class Page
     /**
      * Breadcrumb
      *
-     * @var array
+     * @var Breadcrumb
      */
-    protected array $breadcrumb = [];
+    protected Breadcrumb $breadcrumb;
 
     /**
      * Contructor
@@ -66,7 +68,7 @@ class Page
         string $type = 'blank',
         string $view,
         string $title,
-        array $breadcrumb = []
+        Breadcrumb $breadcrumb = new Breadcrumb()
     ) {
         $this->type = $type;
         $this->view = $view;
@@ -183,18 +185,10 @@ class Page
     function getBreadcrumb(bool $withoutHome = false): array
     {
         if ($withoutHome) {
-            return $this->breadcrumb;
+            return $this->breadcrumb->getBreadcrumbWithoutHome();
         }
 
-        $breads = $this->breadcrumb;
-
-        array_unshift($breads, [
-            'label' => 'Home',
-            'icon' => 'house-fill',
-            'href' => route('admin.home')
-        ]);
-
-        return $breads;
+        return $this->breadcrumb->getBreadcrumb();
     }
 
     /**
