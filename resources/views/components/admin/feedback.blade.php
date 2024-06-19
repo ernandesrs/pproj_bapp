@@ -216,7 +216,7 @@
                         :href="action.href"
                         x-text="action.label"
                         target="_blank"
-                        :class="colors[type] + ' ' + (action?.highlight === false ? '' : 'border')"
+                        :class="colors[type] + ' ' + ('action?.highlight' === false ? '' : 'border')"
                         class="px-3 hover:text-opacity-100 duration-200"></a>
                 </template>
                 <template x-for="action in actions.filter((fa) => !fa.external)">
@@ -224,7 +224,7 @@
                         wire:navigate
                         :href="action.href"
                         x-text="action.label"
-                        :class="colors[type] + ' ' + (action?.highlight === false ? '' : 'border')"
+                        :class="colors[type] + ' ' + ('action?.highlight' === false ? '' : 'border')"
                         class="px-3 hover:text-opacity-100 duration-200"></a>
                 </template>
             </div>

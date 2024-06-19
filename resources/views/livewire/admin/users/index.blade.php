@@ -1,5 +1,5 @@
-<x-admin.layout.page.base>
+<x-common.layout.page-base>
     <p>
         LIST
     </p>
-</x-admin.layout.page.base>
+</x-common.layout.page-base>

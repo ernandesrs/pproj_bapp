@@ -1,5 +1,5 @@
-<x-admin.layout.page.base>
+<x-common.layout.page-base>
     <p>
         CREATE
     </p>
-</x-admin.layout.page.base>
+</x-common.layout.page-base>

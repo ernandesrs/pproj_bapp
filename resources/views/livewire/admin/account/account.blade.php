@@ -1,4 +1,4 @@
-<x-admin.layout.page.base>
+<x-common.layout.page-base>
 
     <div class="flex flex-wrap gap-y-6">
 
@@ -16,4 +16,4 @@
 
     </div>
 
-</x-admin.layout.page.base>
+</x-common.layout.page-base>
