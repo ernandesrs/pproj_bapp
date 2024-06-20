@@ -43,6 +43,9 @@
                         @foreach ($this->page()->getListColumnsLabel() as $label)
                             <th class="px-8 py-3">{{ $label['label'] }}</th>
                         @endforeach
+                        @if (!$this->page()->withoutListActions())
+                            <th>Actions</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody class="text-slate-500">
@@ -72,11 +75,13 @@
                                     @endif
                                 </td>
                             @endforeach
-                            {{-- <td class="px-8 py-2">
-                                <x-common.clickable
-                                    prepend-icon="trash" label="Delete"
-                                    class="bg-red-400 hover:bg-red-500 text-slate-100 hover:text-slate-100 text-sm" />
-                            </td> --}}
+                            @if (!$this->page()->withoutListActions())
+                                <td class="px-8 py-2 align-middle">
+                                    <x-common.clickable
+                                        prepend-icon="trash" label="Delete"
+                                        class="bg-red-400 hover:bg-red-500 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>

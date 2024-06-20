@@ -46,6 +46,16 @@ class PageList extends Page
     }
 
     /**
+     * Define if the list render button actions
+     *
+     * @return bool
+     */
+    function withoutListActions(): bool
+    {
+        return false;
+    }
+
+    /**
      *
      *
      * GETTERS
