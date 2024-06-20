@@ -22,6 +22,16 @@ class PageList extends Page
     private int $listLimit = 20;
 
     /**
+     * List configuration
+     *
+     * @var array
+     */
+    private array $listConfig = [
+        'column_labels' => [],
+        'column_contents' => []
+    ];
+
+    /**
      * Constructor
      *
      * @param string $view
@@ -74,6 +84,26 @@ class PageList extends Page
     }
 
     /**
+     * Get list columns labels
+     *
+     * @return array
+     */
+    function getListColumnsLabel()
+    {
+        return $this->listConfig['column_labels'];
+    }
+
+    /**
+     * Get list columns content data
+     *
+     * @return array
+     */
+    function getListColumnsContent()
+    {
+        return $this->listConfig['column_contents'];
+    }
+
+    /**
      *
      *
      * SETTERS
@@ -102,6 +132,31 @@ class PageList extends Page
     function setListLimit(int $limit = 20)
     {
         $this->listLimit = $limit;
+        return $this;
+    }
+
+    /**
+     * Set list columns
+     *
+     * @param string $label Column label
+     * @param string|null $key Key in model to get column value
+     * @param \Closure|null $callback Function returning a string with a custom value for the column
+     * @param string|null $view Full path to a custom view for the column.
+     *                          Note: The list item will be in a variable 'item' and 'model' in the view.
+     * @return PageList
+     */
+    function setListColumn(string $label, ?string $key = null, ?\Closure $callback = null, ?string $view = null)
+    {
+        $this->listConfig['column_labels'][] = [
+            'label' => $label
+        ];
+
+        $this->listConfig['column_contents'][] = [
+            'key' => $key,
+            'callback' => $callback,
+            'view' => $view
+        ];
+
         return $this;
     }
 

@@ -24,6 +24,12 @@ class Index extends PageBase
         )
             ->setLayout('admin.layouts.layout1')
             ->setIcon('people-fill')
-            ->setModelClass(\App\Models\User::class);
+            ->setModelClass(\App\Models\User::class)
+            ->setListColumn('ID', 'id')
+            ->setListColumn('Name', null, function ($user) {
+                return $user->first_name . ' ' . $user->last_name;
+            }, null)
+            ->setListColumn('Status', null, null, 'livewire.admin.users.includes.status')
+            ->setListColumn('E-mail', 'email');
     }
 }

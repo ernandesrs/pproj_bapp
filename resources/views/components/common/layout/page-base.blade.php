@@ -40,21 +40,43 @@
             <table class="w-full text-left">
                 <thead class="bg-slate-200 text-slate-600">
                     <tr>
-                        <th class="px-8 py-3">ID</th>
-                        <th class="px-8 py-3">Name</th>
-                        <th class="px-8 py-3">Actions</th>
+                        @foreach ($this->page()->getListColumnsLabel() as $label)
+                            <th class="px-8 py-3">{{ $label['label'] }}</th>
+                        @endforeach
                     </tr>
                 </thead>
                 <tbody class="text-slate-500">
                     @foreach ($this->page()->getListItems() as $key => $listItem)
-                        <tr class="{{ ($key + 1) % 2 == 0 ? 'bg-slate-50' : 'bg-slate-100' }} hover:bg-opacity-75 duration-200">
-                            <td class="px-8 py-2">{{ $listItem->id }}</td>
-                            <td class="px-8 py-2">{{ $listItem->first_name . ' ' . $listItem->last_name }}</td>
-                            <td class="px-8 py-2">
+                        <tr
+                            class="{{ ($key + 1) % 2 == 0 ? 'bg-slate-50' : 'bg-slate-100' }} hover:bg-opacity-75 duration-200">
+                            @foreach ($this->page()->getListColumnsContent() as $content)
+                                <td class="px-8 py-2">
+                                    @if (!is_null($content['key']))
+                                        @php
+                                            $key = $content['key'];
+                                        @endphp
+                                        {{ $listItem->$key }}
+                                    @elseif (!is_null($content['callback']))
+                                        @php
+                                            $callback = $content['callback'];
+                                        @endphp
+                                        {{ $callback($listItem) }}
+                                    @elseif (!is_null($content['view']))
+                                        @php
+                                            $view = $content['view'];
+                                        @endphp
+                                        @include($view, [
+                                            'item' => $listItem,
+                                            'model' => $listItem,
+                                        ])
+                                    @endif
+                                </td>
+                            @endforeach
+                            {{-- <td class="px-8 py-2">
                                 <x-common.clickable
                                     prepend-icon="trash" label="Delete"
                                     class="bg-red-400 hover:bg-red-500 text-slate-100 hover:text-slate-100 text-sm" />
-                            </td>
+                            </td> --}}
                         </tr>
                     @endforeach
                 </tbody>
