@@ -1,11 +1,11 @@
 @php
-    $pageContainerStyle = $this->page()->typeIsBlank() ? '' : 'bg-white';
+    $pageContainerStyle = $this->page()->typeIsBlank() ? '' : '';
 @endphp
 
-<div class="{{ $pageContainerStyle }} w-full min-h-full px-5 py-4">
+<div class="{{ $pageContainerStyle }} w-full min-h-full px-5 {{ $this->page()->typeIsBlank() ? 'py-5' : '' }}">
     {{-- page header --}}
     @if (!$this->page()->typeIsBlank())
-        <div class="flex items-center mb-5">
+        <div class="flex items-center py-3 mb-5">
             {{-- title --}}
             @if ($this->page()->getTitle())
                 <div class="flex items-center text-xl text-gray-700">
