@@ -3,21 +3,20 @@
 namespace App\Livewire\Admin;
 
 use App\Livewire\Makers\Breadcrumb;
-use App\Livewire\Makers\Pages\Page;
 use App\Livewire\Makers\Pages\PageBase;
+use App\Livewire\Makers\Pages\PageBlank;
 
 class Home extends PageBase
 {
     /**
      * Page
      *
-     * @return Page|null
+     * @return PageBlank|null
      */
-    function page(): ?Page
+    function page(): ?PageBlank
     {
         return (
-            new Page(
-                'blank',
+            new PageBlank(
                 'admin.home',
                 'Overview',
                 (new Breadcrumb)->addItem('Overview', 'app', route('admin.home'))

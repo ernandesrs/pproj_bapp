@@ -12,7 +12,6 @@ class Account extends PageBase
     {
         return (
             new Page(
-                'normal',
                 'admin.account.account',
                 'Account',
                 (new Breadcrumb)->addItem('My account', 'person-circle', route('admin.account'))

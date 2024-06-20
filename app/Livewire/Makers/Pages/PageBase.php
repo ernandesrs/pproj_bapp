@@ -8,11 +8,11 @@ use Livewire\Component;
 class PageBase extends Component
 {
     /**
-     * \App\Livewire\Makers\Pages\Page instance
+     * \App\Livewire\Makers\Pages\Page|\App\Livewire\Makers\Pages\PageList|\App\Livewire\Makers\Pages\PageBlank instance
      *
-     * @return Page|null
+     * @return Page|PageList|PageBlank|null
      */
-    function page(): ?Page
+    function page()
     {
         return null;
     }
@@ -41,7 +41,9 @@ class PageBase extends Component
     {
         throw_if(
             is_null($this->page()),
-            'An instance of "\App\Livewire\Makers\Pages\Page" required! Implement in "' . get_class($this) . '" a public method called "page", returning an instance "\App\Livewire\Makers\Pages\Page".'
+            'Needs a page! Implement in "' . get_class($this) . '" a public method called "page", returning an instance "\App\Livewire\Makers\Pages\Page" or "\App\Livewire\Makers\Pages\PageList" or "\App\Livewire\Makers\Pages\PageBlank".'
         );
+
+        $this->page()->validatePage();
     }
 }

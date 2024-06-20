@@ -12,7 +12,6 @@ class Create extends PageBase
     {
         return (
             new Page(
-                'normal',
                 'admin.users.create',
                 'Create',
                 (new Breadcrumb)

@@ -59,18 +59,16 @@ class Page
     /**
      * Contructor
      *
-     * @param string $blank page type: blank, normal, list
      * @param string $view page livewire view name
      * @param string $title page title
      * @param array $breadcrumb page breadcrumb
      */
     function __construct(
-        string $type = 'blank',
         string $view,
         string $title,
         Breadcrumb $breadcrumb = new Breadcrumb()
     ) {
-        $this->type = $type;
+        $this->type = 'normal';
         $this->view = $view;
         $this->title = $title;
         $this->breadcrumb = $breadcrumb;
@@ -270,5 +268,15 @@ class Page
             'external' => $external
         ];
         return $this;
+    }
+
+    /**
+     * Validate page data
+     *
+     * @return void
+     */
+    function validatePage()
+    {
+        //
     }
 }
