@@ -3,13 +3,17 @@
 namespace App\Livewire\Admin\Users;
 
 use App\Livewire\Makers\Breadcrumb;
-use App\Livewire\Makers\Pages\Page;
 use App\Livewire\Makers\Pages\PageBase;
 use App\Livewire\Makers\Pages\PageList;
 
 class Index extends PageBase
 {
-    function page(): Page|null
+    /**
+     * Page
+     *
+     * @return PageList|null
+     */
+    function page(): PageList|null
     {
         return (
             new PageList(
@@ -20,6 +24,6 @@ class Index extends PageBase
         )
             ->setLayout('admin.layouts.layout1')
             ->setIcon('people-fill')
-            ->setAction('Create user', route('admin.users.create'), 'person-fill-add', 'primary', false);
+            ->setModelClass(\App\Models\User::class);
     }
 }
