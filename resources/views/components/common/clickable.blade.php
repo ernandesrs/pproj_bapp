@@ -9,7 +9,7 @@
     $isLink = $attributes->has('href');
 
     $attributes = $attributes->merge([
-        'class'=>'px-5 py-2 bg-slate-100 hover:bg-slate-200 duration-300 text-slate-500 hover:text-slate-600'
+        'class'=>'px-5 py-2 bg-slate-100 hover:bg-slate-300 duration-300 text-slate-500 hover:text-slate-600'
     ]);
 @endphp
 

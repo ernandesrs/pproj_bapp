@@ -1,7 +1,7 @@
 <x-common.layout.page-base>
 
-    <div class="flex">
-        <div class="basis-full md:basis-4/12 md:pr-2 flex justify-center">
+    <div class="flex flex-wrap">
+        <div class="basis-full md:basis-4/12 mb-6 md:mb-0 md:pr-2 flex justify-center">
             <x-common.content-block
                 title="User picture"
                 class="flex justify-center">
