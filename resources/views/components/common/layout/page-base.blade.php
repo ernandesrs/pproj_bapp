@@ -51,7 +51,7 @@
                 <tbody class="text-slate-500">
                     @foreach ($this->page()->getListItems() as $key => $listItem)
                         <tr
-                            class="{{ ($key + 1) % 2 == 0 ? 'bg-slate-50' : 'bg-slate-100' }} hover:bg-opacity-75 duration-200">
+                            class="{{ ($key + 1) % 2 == 0 ? 'bg-slate-100' : 'bg-slate-50' }} hover:bg-opacity-75 duration-200">
                             @foreach ($this->page()->getListColumnsContent() as $content)
                                 <td class="px-8 py-2">
                                     @if (!is_null($content['key']))
@@ -76,8 +76,23 @@
                                 </td>
                             @endforeach
                             @if (!$this->page()->withoutListActions())
-                                <td class="px-8 py-2 align-middle">
+                                <td class="px-8 py-2 align-middle flex flex-wrap justify-start items-center gap-1">
                                     <x-common.clickable
+                                        type="button"
+                                        prepend-icon="eye" label="Show"
+                                        class="bg-indigo-500 hover:bg-indigo-600 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
+
+                                    <x-common.clickable
+                                        type="button"
+
+                                        prepend-icon="pencil" label="Edit"
+                                        class="bg-blue-500 hover:bg-blue-600 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
+
+                                    <x-common.clickable
+                                        type="button"
+                                        wire:click="delete"
+                                        wire:confirm="Are you sure you want to delete this item?"
+
                                         prepend-icon="trash" label="Delete"
                                         class="bg-red-400 hover:bg-red-500 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
                                 </td>
