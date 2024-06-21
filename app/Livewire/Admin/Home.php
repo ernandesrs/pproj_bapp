@@ -2,26 +2,17 @@
 
 namespace App\Livewire\Admin;
 
-use App\Livewire\Makers\Breadcrumb;
-use App\Livewire\Makers\Pages\PageBase;
-use App\Livewire\Makers\Pages\PageBlank;
+use App\Livewire\Builders\Breadcrumb;
+use App\Livewire\Builders\Pages\DefaultPage;
 
-class Home extends PageBase
+class Home extends DefaultPage
 {
-    /**
-     * Page
-     *
-     * @return PageBlank|null
-     */
-    function page(): ?PageBlank
+    function pageConfig()
     {
-        return (
-            new PageBlank(
-                'admin.home',
-                'Overview',
-                (new Breadcrumb)->addItem('Overview', 'app', route('admin.home'))
-            )
-        )->setLayout('admin.layouts.layout1')
-            ->setIcon('pie-chart-fill');
+        return $this
+            ->setLayout('admin.layouts.layout1')
+            ->setView('admin.home')
+            ->setTitle('Overview')
+            ->setBreadcrumb((new Breadcrumb)->addItem('Overview', 'app', route('admin.home')));
     }
 }
