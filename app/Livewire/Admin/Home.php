@@ -9,7 +9,7 @@ class Home extends DefaultPage
 {
     function pageConfig()
     {
-        return $this
+        return parent::pageConfig()
             ->setLayout('admin.layouts.layout1')
             ->setView('admin.home')
             ->setTitle('Overview')

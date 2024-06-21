@@ -2,25 +2,20 @@
 
 namespace App\Livewire\Admin\Users;
 
-use App\Livewire\Makers\Breadcrumb;
-use App\Livewire\Makers\Pages\Page;
-use App\Livewire\Makers\Pages\PageBase;
+use App\Livewire\Builders\Pages\DefaultPage;
+use App\Livewire\Builders\Breadcrumb;
 
-class Create extends PageBase
+class Create extends DefaultPage
 {
-    function page(): Page|null
+    function pageConfig()
     {
-        return (
-            new Page(
-                'admin.users.create',
-                'Create',
-                (new Breadcrumb)
-                    ->addItem('Users', 'people-fill', route('admin.users.index'))
-                    ->addItem('Create', 'person-check', route('admin.users.create'))
-            )
-        )
+        return parent::pageConfig()
             ->setLayout('admin.layouts.layout1')
-            ->setIcon('person-fill-add')
-            ->setAction('Back to list', route('admin.users.index'), 'arrow-left', 'light', false);
+            ->setView('admin.users.create')
+            ->setTitle('Create')
+            ->setIcon('person-plus-fill')
+            ->setBreadcrumb((new Breadcrumb)
+                ->addItem('Users', 'people-fill', route('admin.users.index'))
+                ->addItem('Create', 'person-fill-add', route('admin.users.create')));
     }
 }

@@ -2,27 +2,20 @@
 
 namespace App\Livewire\Admin\Users;
 
-use App\Livewire\Makers\Breadcrumb;
-use App\Livewire\Makers\Pages\Page;
-use App\Livewire\Makers\Pages\PageBase;
+use App\Livewire\Builders\Breadcrumb;
+use App\Livewire\Builders\Pages\DefaultPage;
 
-class Edit extends PageBase
+class Edit extends DefaultPage
 {
-    /**
-     * Page
-     *
-     * @return Page
-     */
-    function page()
+    function pageConfig()
     {
-        return (
-            new Page(
-                'admin.users.edit',
-                'Edit',
-                (new Breadcrumb)->addItem('Edit', 'person-fill-gear', route('admin.users.edit', ['user' => 0]))
-            )
-        )
+        return parent::pageConfig()
             ->setLayout('admin.layouts.layout1')
-            ->setIcon('person-fill-gear');
+            ->setView('admin.users.edit')
+            ->setTitle('Edit')
+            ->setIcon('person-fill-gear')
+            ->setBreadcrumb((new Breadcrumb)
+                ->addItem('Users', 'people-fill', route('admin.users.index'))
+                ->addItem('Edit', 'person-fill-gear', route('admin.users.edit', ['user' => 1])));
     }
 }

@@ -2,34 +2,24 @@
 
 namespace App\Livewire\Admin\Users;
 
-use App\Livewire\Makers\Breadcrumb;
-use App\Livewire\Makers\Pages\PageBase;
-use App\Livewire\Makers\Pages\PageList;
+use App\Livewire\Builders\Breadcrumb;
+use App\Livewire\Builders\Pages\ListPage;
 
-class Index extends PageBase
+class Index extends ListPage
 {
-    /**
-     * Page
-     *
-     * @return PageList|null
-     */
-    function page(): PageList|null
+    function pageConfig()
     {
-        return (
-            new PageList(
-                'admin.users.index',
-                'Users',
-                (new Breadcrumb)->addItem('Users', 'people-fill', route('admin.users.index'))
-            )
-        )
+        return parent::pageConfig()
             ->setLayout('admin.layouts.layout1')
+            ->setView('admin.users.index')
             ->setIcon('people-fill')
+            ->setTitle('Users')
+            ->setBreadcrumb((new Breadcrumb)->addItem('Users', 'app', route('admin.home')))
             ->setModelClass(\App\Models\User::class)
+            ->setListLimit(20)
             ->setListColumn('ID', 'id')
-            ->setListColumn('Name', null, function ($user) {
-                return $user->first_name . ' ' . $user->last_name;
-            }, null)
-            ->setListColumn('Status', null, null, 'livewire.admin.users.includes.status')
+            ->setListColumn('Custom view', null, null, 'livewire.admin.users.includes.status')
+            ->setListColumn('Name', null, fn($user) => $user->first_name . ' ' . $user->last_name, null)
             ->setListColumn('E-mail', 'email');
     }
 }
