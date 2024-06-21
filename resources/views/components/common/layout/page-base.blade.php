@@ -1,26 +1,26 @@
 @php
-    $pageContainerStyle = $this->page()->typeIsBlank() ? '' : '';
+    $pageContainerStyle = $this->typeIsBlank() ? '' : '';
 @endphp
 
-<div class="{{ $pageContainerStyle }} w-full min-h-full px-5 {{ $this->page()->typeIsBlank() ? 'py-5' : '' }}">
+<div class="{{ $pageContainerStyle }} w-full min-h-full px-5 {{ $this->typeIsBlank() ? 'py-5' : '' }}">
     {{-- page header --}}
-    @if (!$this->page()->typeIsBlank())
+    @if (!$this->typeIsBlank())
         <div class="flex items-center py-3 mb-5">
             {{-- title --}}
-            @if ($this->page()->getTitle())
+            @if ($this->getTitle())
                 <div class="flex items-center text-xl text-gray-700">
-                    @if (!empty($this->page()->getIcon()))
-                        <x-common.icon name="{{ $this->page()->getIcon() }}" class="mr-2" />
+                    @if (!empty($this->getIcon()))
+                        <x-common.icon name="{{ $this->getIcon() }}" class="mr-2" />
                     @endif
-                    <div class="font-semibold">{{ $this->page()->getTitle() }}</div>
+                    <div class="font-semibold">{{ $this->getTitle() }}</div>
                 </div>
             @endif
             {{-- /title --}}
 
             {{-- actions --}}
-            @if ($this->page()->hasActions())
+            @if ($this->hasActions())
                 <div class="flex items-center ml-auto">
-                    @foreach ($this->page()->getActions() as $action)
+                    @foreach ($this->getActions() as $action)
                         <x-common.clickable
                             prepend-icon="{{ $action['icon'] }}"
                             label="{{ $action['label'] }}"
@@ -36,23 +36,23 @@
 
     {{-- page content --}}
     <div class="mb-8">
-        @if ($this->page()->typeIsList())
+        @if ($this->typeIsList())
             <table class="w-full text-left">
                 <thead class="bg-slate-200 text-slate-600">
                     <tr>
-                        @foreach ($this->page()->getListColumnsLabel() as $label)
+                        @foreach ($this->getListColumnsLabel() as $label)
                             <th class="px-8 py-3">{{ $label['label'] }}</th>
                         @endforeach
-                        @if (!$this->page()->withoutListActions())
+                        @if (!$this->withoutListActions())
                             <th>Actions</th>
                         @endif
                     </tr>
                 </thead>
                 <tbody class="text-slate-500">
-                    @foreach ($this->page()->getListItems() as $key => $listItem)
+                    @foreach ($this->getListItems() as $key => $listItem)
                         <tr
                             class="{{ ($key + 1) % 2 == 0 ? 'bg-slate-100' : 'bg-slate-50' }} hover:bg-opacity-75 duration-200">
-                            @foreach ($this->page()->getListColumnsContent() as $content)
+                            @foreach ($this->getListColumnsContent() as $content)
                                 <td class="px-8 py-2">
                                     @if (!is_null($content['key']))
                                         @php
@@ -75,7 +75,7 @@
                                     @endif
                                 </td>
                             @endforeach
-                            @if (!$this->page()->withoutListActions())
+                            @if (!$this->withoutListActions())
                                 <td class="px-8 py-2 align-middle flex flex-wrap justify-start items-center gap-1">
                                     <x-common.clickable
                                         type="button"
@@ -106,7 +106,7 @@
             </table>
 
             <div class="w-full flex justify-content-center mt-3">
-                {{ $this->page()->getListitems()->links() }}
+                {{ $this->getListitems()->links() }}
             </div>
         @else
             {{ $slot }}
