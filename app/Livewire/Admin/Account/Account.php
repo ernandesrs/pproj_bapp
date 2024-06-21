@@ -2,22 +2,18 @@
 
 namespace App\Livewire\Admin\Account;
 
-use App\Livewire\Makers\Breadcrumb;
-use App\Livewire\Makers\Pages\Page;
-use App\Livewire\Makers\Pages\PageBase;
+use App\Livewire\Builders\Pages\DefaultPage;
+use App\Livewire\Builders\Breadcrumb;
 
-class Account extends PageBase
+class Account extends DefaultPage
 {
-    function page(): Page|null
+    function pageConfig()
     {
-        return (
-            new Page(
-                'admin.account.account',
-                'Account',
-                (new Breadcrumb)->addItem('My account', 'person-circle', route('admin.account'))
-            )
-        )
+        return $this
             ->setLayout('admin.layouts.layout1')
-            ->setIcon('person-circle');
+            ->setView('admin.account.account')
+            ->setBreadcrumb((new Breadcrumb)->addItem('Account', 'person-fill-gear', route('admin.account')))
+            ->setTitle('Account')
+            ->setIcon('person-fill-gear');
     }
 }

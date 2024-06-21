@@ -102,6 +102,11 @@ class DefaultPage extends Component
     protected function validatePageData()
     {
         throw_if(
+            is_null($this->pageConfig()),
+            'In your Livewire component class, override the public "pageConfig()" method and return the instance of the class itself.'
+        );
+
+        throw_if(
             empty($this->getLayout()) || empty($this->getView()),
             'Need basic settings! In your Livewire component class, override the public "pageConfig()" method and return the instance of the class itself. Open the method and see your documentation/comments.'
         );
