@@ -45,6 +45,21 @@ class PageList extends Page
         $this->modelInstance = null;
     }
 
+    function show(int $id)
+    {
+        dd('show: ' . $id);
+    }
+
+    function edit(int $id)
+    {
+        dd('edit: ' . $id);
+    }
+
+    function delete(int $id)
+    {
+        dd('delete: ' . $id);
+    }
+
     /**
      * Define if the list render button actions
      *

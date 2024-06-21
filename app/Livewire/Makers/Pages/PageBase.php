@@ -32,6 +32,27 @@ class PageBase extends Component
             ]);
     }
 
+    function show(int $id)
+    {
+        if ($this->page()->typeIsList()) {
+            $this->page()->show($id);
+        }
+    }
+
+    function edit(int $id)
+    {
+        if ($this->page()->typeIsList()) {
+            $this->page()->edit($id);
+        }
+    }
+
+    function delete(int $id)
+    {
+        if ($this->page()->typeIsList()) {
+            $this->page()->delete($id);
+        }
+    }
+
     /**
      * Validate page
      *
