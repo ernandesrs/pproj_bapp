@@ -14,7 +14,7 @@ trait TraitSetters
      */
     function setModelClass(string $modelClass)
     {
-        $this->modelInstance = new $modelClass;
+        $this->modelClass = $modelClass;
         return $this;
     }
 

@@ -6,15 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 trait TraitGetters
 {
-
     /**
      * Get list items
      *
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return mixed
      */
     function getListItems()
     {
-        return $this->getModelInstance()->paginate($this->getListLimit())->withQueryString();
+        if (is_null($this->listItems)) {
+            $this->loadListItems();
+        }
+
+        return $this->listItems;
     }
 
     /**
@@ -24,7 +27,11 @@ trait TraitGetters
      */
     function getModelInstance()
     {
-        return $this->modelInstance;
+        if ($this->modelInstance instanceof Model) {
+            return $this->modelInstance;
+        }
+
+        return new $this->modelClass;
     }
 
     /**

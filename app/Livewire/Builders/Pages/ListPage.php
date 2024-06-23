@@ -12,11 +12,25 @@ class ListPage extends DefaultPage
     use TraitGetters, TraitSetters;
 
     /**
+     * Model class
+     *
+     * @var null|string
+     */
+    private null|string $modelClass = null;
+
+    /**
      * Model instance
      *
      * @var null|Model
      */
     private null|Model $modelInstance = null;
+
+    /**
+     * List items
+     *
+     * @var mixed
+     */
+    private mixed $listItems = null;
 
     /**
      * List limit
@@ -63,6 +77,17 @@ class ListPage extends DefaultPage
     function withoutListActions(): bool
     {
         return false;
+    }
+
+    /**
+     * Load list items
+     *
+     * @return ListPage
+     */
+    function loadListItems()
+    {
+        $this->listItems = $this->getModelInstance()->paginate($this->getListLimit())->withQueryString();
+        return $this;
     }
 
     /**
