@@ -44,8 +44,23 @@ trait TraitGetters
         return $this->pageListLimit();
     }
 
+    /**
+     * Get table config
+     *
+     * @return null|\App\Livewire\Builders\Pages\List\Table
+     */
     function getTableConfig()
     {
         return $this->pageTableConfig();
+    }
+
+    /**
+     * Get list item actions(show, edit, delete)
+     *
+     * @return null|\App\Livewire\Builders\Pages\List\ListAction
+     */
+    function getListActions()
+    {
+        return $this->pageListActions();
     }
 }

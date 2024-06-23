@@ -3,6 +3,8 @@
 namespace App\Livewire\Admin\Users;
 
 use App\Livewire\Builders\Breadcrumb;
+use App\Livewire\Builders\Pages\Actions\ActionEdit;
+use App\Livewire\Builders\Pages\List\ListAction;
 use App\Livewire\Builders\Pages\List\Table;
 use App\Livewire\Builders\Pages\ListPage;
 use App\Models\User;
@@ -47,5 +49,13 @@ class Index extends ListPage
             ->addColumn('Name', null, fn($user) => $user->first_name . ' ' . $user->last_name)
             ->addColumn('Status', null, null, 'livewire.admin.users.includes.status')
             ->addColumn('E-mail', 'email');
+    }
+
+    function pageListActions()
+    {
+        return (new ListAction)
+            ->addEdit(
+                ActionEdit::route('admin.users.edit', ['user' => 'id'])
+            );
     }
 }

@@ -44,7 +44,9 @@
                             @foreach ($this->getTableConfig()->getColumnLabels() as $label)
                                 <th class="px-8 py-3">{{ $label['label'] }}</th>
                             @endforeach
-                            <th>Actions</th>
+                            @if ($this->getListActions())
+                                <th>Actions</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody class="text-slate-500">
@@ -75,28 +77,36 @@
                                     </td>
                                 @endforeach
 
-                                <td class="px-8 py-2 align-middle flex flex-wrap justify-start items-center gap-1">
-                                    <x-common.clickable
-                                        type="button"
-                                        wire:click="show({{ $listItem->id }})"
+                                @if ($this->getListActions())
+                                    <td class="px-8 py-2 align-middle flex flex-wrap justify-start items-center gap-1">
+                                        @if ($this->getListActions()->getShow())
+                                            <x-common.clickable
+                                                type="button"
+                                                wire:click="show({{ $listItem->id }})"
 
-                                        prepend-icon="eye" label="Show"
-                                        class="bg-indigo-500 hover:bg-indigo-600 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
+                                                prepend-icon="eye" label="Show"
+                                                class="bg-indigo-500 hover:bg-indigo-600 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
+                                        @endif
 
-                                    <x-common.clickable
-                                        type="button"
-                                        wire:click="edit({{ $listItem->id }})"
+                                        @if ($this->getListActions()->getEdit())
+                                            <x-common.clickable
+                                                type="button"
+                                                wire:click="edit({{ $listItem->id }})"
 
-                                        prepend-icon="pencil" label="Edit"
-                                        class="bg-blue-500 hover:bg-blue-600 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
+                                                prepend-icon="pencil" label="Edit"
+                                                class="bg-blue-500 hover:bg-blue-600 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
+                                        @endif
 
-                                    <x-common.clickable
-                                        type="button"
-                                        wire:click="delete({{ $listItem->id }})"
-                                        wire:confirm="Are you sure you want to delete this item?"
+                                        @if ($this->getListActions()->getDelete())
+                                            <x-common.clickable
+                                                type="button"
+                                                wire:click="delete({{ $listItem->id }})"
+                                                wire:confirm="Are you sure you want to delete this item?"
 
-                                        prepend-icon="trash" label="Delete"
-                                        class="bg-red-400 hover:bg-red-500 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
+                                                prepend-icon="trash" label="Delete"
+                                                class="bg-red-400 hover:bg-red-500 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
+                                        @endif
+                                @endif
                                 </td>
                             </tr>
                         @endforeach

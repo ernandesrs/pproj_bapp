@@ -56,9 +56,21 @@ class ListPage extends DefaultPage
         return $this;
     }
 
+    /**
+     * Edit item
+     *
+     * @param integer $id
+     * @return mixed
+     */
     function edit(int $id)
     {
-        dump('edit "' . $this->modelClass . '" id ' . $id);
+        $routeEdit = $this->getListActions()->getEdit();
+
+        if (!$routeEdit) {
+            return;
+        }
+
+        return $this->redirect(route($routeEdit->name, $routeEdit->params), true);
     }
 
     /**
