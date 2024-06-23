@@ -76,6 +76,7 @@ class ListPage extends DefaultPage
      */
     function pageConfig()
     {
+        parent::pageConfig();
         $this->type = 'list';
         return $this;
     }
@@ -99,6 +100,11 @@ class ListPage extends DefaultPage
     {
         $this->listItems = $this->getModelInstance()->paginate($this->getListLimit())->withQueryString();
         return $this;
+    }
+
+    function edit(int $id)
+    {
+        dump('edit "' . $this->modelClass . '" id ' . $id);
     }
 
     /**

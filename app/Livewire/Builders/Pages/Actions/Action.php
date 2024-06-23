@@ -4,6 +4,10 @@ namespace App\Livewire\Builders\Pages\Actions;
 
 class Action
 {
+    public ?string $type = null;
+    public ?string $name = null;
+    public array $params = [];
+
     /**
      * Set action route
      *
@@ -17,5 +21,10 @@ class Action
         $this->type = $type;
         $this->name = $name;
         $this->params = $params;
+    }
+
+    function typeIsRoute()
+    {
+        return $this->type == 'route';
     }
 }
