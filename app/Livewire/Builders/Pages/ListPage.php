@@ -59,7 +59,7 @@ class ListPage extends DefaultPage
     /**
      * Edit item
      *
-     * @param integer $id
+     * @param int $id
      * @return mixed
      */
     function edit(int $id)
@@ -70,7 +70,17 @@ class ListPage extends DefaultPage
             return;
         }
 
-        return $this->redirect(route($routeEdit->name, $routeEdit->params), true);
+        foreach ($routeEdit->params as $k => $p) {
+            if ($p == 'id') {
+                $routeEdit->params[$k] = $id;
+            }
+        }
+
+        if ($routeEdit->typeIsRoute()) {
+            return $this->redirect(route($routeEdit->name, $routeEdit->params), true);
+        }
+
+        return;
     }
 
     /**

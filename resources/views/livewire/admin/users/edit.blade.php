@@ -1,5 +1,3 @@
 <x-common.layout.page-base>
-    <p>
-        EDIT
-    </p>
+    @dump($user)
 </x-common.layout.page-base>
