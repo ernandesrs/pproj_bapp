@@ -31,7 +31,7 @@ trait TraitGetters
             return $this->modelInstance;
         }
 
-        return new $this->modelClass;
+        return new ($this->pageModelClass())();
     }
 
     /**
@@ -41,7 +41,7 @@ trait TraitGetters
      */
     function getListLimit()
     {
-        return $this->listLimit;
+        return $this->pageListLimit();
     }
 
     /**
@@ -51,7 +51,7 @@ trait TraitGetters
      */
     function getListColumnsLabel()
     {
-        return $this->listConfig['column_labels'];
+        return $this->pageListTable()->getTableHeadLabels();
     }
 
     /**
@@ -61,7 +61,7 @@ trait TraitGetters
      */
     function getListColumnsContent()
     {
-        return $this->listConfig['column_contents'];
+        return $this->pageListTable()->getTableRowColumns();
     }
 
     /**

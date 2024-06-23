@@ -10,6 +10,8 @@ class DefaultPage extends Component
 {
     use TraitSetters, TraitGetters;
 
+    protected array $fails = [];
+
     /**
      * Type
      * Allows: default, normal and list
@@ -57,20 +59,18 @@ class DefaultPage extends Component
      */
     protected function validatePageData()
     {
-        $fails = [];
-
         if (empty($this->getLayout())) {
-            $fails[] = 'Override the "pageLayout()" public method, returning the layout path.';
+            $this->fails[] = 'Override the "pageLayout()" public method, returning the layout path.';
         }
 
         if (empty($this->getView())) {
-            $fails[] = 'Override the "pageView()" public method, returning the view path.';
+            $this->fails[] = 'Override the "pageView()" public method, returning the view path.';
         }
 
         if (empty($this->pageTitle())) {
-            $fails[] = 'Override the "pageTitle()" public method, returning the page title.';
+            $this->fails[] = 'Override the "pageTitle()" public method, returning the page title.';
         }
 
-        throw_if(count($fails) > 0, "In your Livewire component class: " . implode(" | ", $fails));
+        throw_if(count($this->fails) > 0, "In your Livewire component class: " . implode(" | ", $this->fails));
     }
 }

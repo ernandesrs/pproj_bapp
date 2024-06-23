@@ -12,13 +12,6 @@ class ListPage extends DefaultPage
     use TraitGetters, TraitSetters;
 
     /**
-     * Model class
-     *
-     * @var null|string
-     */
-    private null|string $modelClass = null;
-
-    /**
      * Model instance
      *
      * @var null|Model
@@ -33,23 +26,6 @@ class ListPage extends DefaultPage
     private mixed $listItems = null;
 
     /**
-     * List limit
-     *
-     * @var int
-     */
-    private int $listLimit = 20;
-
-    /**
-     * List configuration
-     *
-     * @var array
-     */
-    private array $listConfig = [
-        'column_labels' => [],
-        'column_contents' => []
-    ];
-
-    /**
      * List actions(show, edit, delete)
      *
      * @var array
@@ -61,24 +37,13 @@ class ListPage extends DefaultPage
     ];
 
     /**
-     * Page configuration
+     * Mount
      *
-     * Use this method to configure the page.
-     * Return an instance of itself, chaining the configuration methods.
-     * Some configuration methods:
-     * * setLayout(), setView(), setTitle(), setIcon(), setBreadcrumb(), setAction(), ...
-     * * See the trait "\App\Livewire\Builders\Pages\Default\Traits\TraitSetters" for more details and configuration methods.
-     *
-     * * setModelClass(), setListLimit(), setListColumn(), ...
-     * * See the trait "\App\Livewire\Builders\Pages\List\Traits\TraitSetters" for more details and configuration methods.
-     *
-     * @return null|ListPage
+     * @return void
      */
-    function pageConfig()
+    function mount()
     {
-        parent::pageConfig();
         $this->type = 'list';
-        return $this;
     }
 
     /**
@@ -114,8 +79,14 @@ class ListPage extends DefaultPage
      */
     function validatePageData()
     {
-        throw_if(is_null($this->getModelInstance()), 'Upon return from the public method "pageConfig", overwritten in your Livewire components class, chain a call to the "setModelClass" method');
+        if (empty($this->pageModelClass())) {
+            $this->fails[] = 'Override the "pageModelClass()" public method, returning the model class.';
+        }
 
-        parent::validatePageData();
+        if (is_null($this->pageListTable())) {
+            $this->fails[] = 'Override the "pageListTable(" public method, returning a instance of "App\Livewire\Builders\Pages\List\Table".';
+        }
+
+        return parent::validatePageData();
     }
 }
