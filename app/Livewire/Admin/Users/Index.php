@@ -14,8 +14,15 @@ class Index extends ListPage
             ->setView('admin.users.index')
             ->setIcon('people-fill')
             ->setTitle('Users')
-            ->setBreadcrumb((new Breadcrumb)->addItem('Users', 'app', route('admin.home')))
+            ->setBreadcrumb(
+                (new Breadcrumb)->addItem('Users', 'app', route('admin.home'))
+            )
             ->setModelClass(\App\Models\User::class)
+            ->setModelListActions(
+                null,
+                \App\Livewire\Builders\Pages\Actions\ActionEdit::route('admin.users.edit', ['user' => 'id']),
+                null
+            )
             ->setListLimit(20)
             ->setListColumn('ID', 'id')
             ->setListColumn('Custom view', null, null, 'livewire.admin.users.includes.status')

@@ -50,6 +50,17 @@ class ListPage extends DefaultPage
     ];
 
     /**
+     * List actions(show, edit, delete)
+     *
+     * @var array
+     */
+    private array $listActions = [
+        'show' => null,
+        'edit' => null,
+        'delete' => null,
+    ];
+
+    /**
      * Page configuration
      *
      * Use this method to configure the page.

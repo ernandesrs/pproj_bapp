@@ -63,4 +63,14 @@ trait TraitGetters
     {
         return $this->listConfig['column_contents'];
     }
+
+    /**
+     * Get list actions
+     *
+     * @return object
+     */
+    function getModelListActions()
+    {
+        return (object) $this->listActions;
+    }
 }

@@ -44,7 +44,11 @@
                             @foreach ($this->getListColumnsLabel() as $label)
                                 <th class="px-8 py-3">{{ $label['label'] }}</th>
                             @endforeach
-                            @if (!$this->withoutListActions())
+                            @if (
+                                !$this->withoutListActions() &&
+                                    ($this->getModelListActions()->show ||
+                                        $this->getModelListActions()->edit ||
+                                        $this->getModelListActions()->delete))
                                 <th>Actions</th>
                             @endif
                         </tr>
@@ -76,29 +80,37 @@
                                         @endif
                                     </td>
                                 @endforeach
-                                @if (!$this->withoutListActions())
+                                @if (
+                                    !$this->withoutListActions() &&
+                                        ($this->getModelListActions()->show ||
+                                            $this->getModelListActions()->edit ||
+                                            $this->getModelListActions()->delete))
                                     <td class="px-8 py-2 align-middle flex flex-wrap justify-start items-center gap-1">
-                                        <x-common.clickable
-                                            type="button"
-                                            wire:click="show({{ $listItem->id }})"
+                                        @if ($this->getModelListActions()->show)
+                                            <x-common.clickable
+                                                type="button"
+                                                wire:click="show({{ $listItem->id }})"
 
-                                            prepend-icon="eye" label="Show"
-                                            class="bg-indigo-500 hover:bg-indigo-600 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
+                                                prepend-icon="eye" label="Show"
+                                                class="bg-indigo-500 hover:bg-indigo-600 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
+                                        @endif
+                                        @if ($this->getModelListActions()->edit)
+                                            <x-common.clickable
+                                                type="button"
+                                                wire:click="edit({{ $listItem->id }})"
 
-                                        <x-common.clickable
-                                            type="button"
-                                            wire:click="edit({{ $listItem->id }})"
+                                                prepend-icon="pencil" label="Edit"
+                                                class="bg-blue-500 hover:bg-blue-600 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
+                                        @endif
+                                        @if ($this->getModelListActions()->delete)
+                                            <x-common.clickable
+                                                type="button"
+                                                wire:click="delete({{ $listItem->id }})"
+                                                wire:confirm="Are you sure you want to delete this item?"
 
-                                            prepend-icon="pencil" label="Edit"
-                                            class="bg-blue-500 hover:bg-blue-600 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
-
-                                        <x-common.clickable
-                                            type="button"
-                                            wire:click="delete({{ $listItem->id }})"
-                                            wire:confirm="Are you sure you want to delete this item?"
-
-                                            prepend-icon="trash" label="Delete"
-                                            class="bg-red-400 hover:bg-red-500 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
+                                                prepend-icon="trash" label="Delete"
+                                                class="bg-red-400 hover:bg-red-500 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
+                                        @endif
                                     </td>
                                 @endif
                             </tr>
