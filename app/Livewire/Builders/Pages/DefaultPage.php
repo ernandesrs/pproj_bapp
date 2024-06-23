@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Builders\Pages;
 
-use App\Livewire\Builders\Breadcrumb;
 use App\Livewire\Builders\Pages\Default\Traits\TraitGetters;
 use App\Livewire\Builders\Pages\Default\Traits\TraitSetters;
 use Livewire\Component;
@@ -20,34 +19,6 @@ class DefaultPage extends Component
     protected string $type = 'default';
 
     /**
-     * Layout name
-     *
-     * @var string
-     */
-    protected string $layout = '';
-
-    /**
-     * View name
-     *
-     * @var string
-     */
-    protected string $view = '';
-
-    /**
-     * Icon
-     *
-     * @var string|null
-     */
-    protected ?string $icon = 'app';
-
-    /**
-     * Title
-     *
-     * @var string|null
-     */
-    protected ?string $title = '';
-
-    /**
      * Button actions
      *
      * @var array
@@ -55,28 +26,13 @@ class DefaultPage extends Component
     protected array $actions = [];
 
     /**
-     * Breadcrumb
+     * Mount
      *
-     * @var null|Breadcrumb
+     * @return void
      */
-    protected null|Breadcrumb $breadcrumb = null;
-
-    /**
-     * Page configuration
-     *
-     * Use this method to configure the page.
-     * Return an instance of itself, chaining the configuration methods.
-     * Some configuration methods:
-     * setLayout(), setView(), setTitle(), setIcon(), setBreadcrumb(), setAction(), ...
-     *
-     * See the trait "\App\Livewire\Builders\Pages\Default\Traits\TraitSetters" for more details and configuration methods.
-     *
-     * @return null|DefaultPage
-     */
-    function pageConfig()
+    function mount()
     {
         $this->type = 'default';
-        return $this;
     }
 
     /**
@@ -86,7 +42,6 @@ class DefaultPage extends Component
      */
     function render()
     {
-        $this->pageConfig();
         $this->validatePageData();
 
         return view('livewire..' . $this->getView())
@@ -102,9 +57,20 @@ class DefaultPage extends Component
      */
     protected function validatePageData()
     {
-        throw_if(
-            empty($this->getLayout()) || empty($this->getView()),
-            'Need basic settings! In your Livewire component class, override the public "pageConfig()" method and return the instance of the class itself. Open the method and see your documentation/comments.'
-        );
+        $fails = [];
+
+        if (empty($this->getLayout())) {
+            $fails[] = 'Override the "pageLayout()" public method, returning the layout path.';
+        }
+
+        if (empty($this->getView())) {
+            $fails[] = 'Override the "pageView()" public method, returning the view path.';
+        }
+
+        if (empty($this->pageTitle())) {
+            $fails[] = 'Override the "pageTitle()" public method, returning the page title.';
+        }
+
+        throw_if(count($fails) > 0, "In your Livewire component class: " . implode(" | ", $fails));
     }
 }

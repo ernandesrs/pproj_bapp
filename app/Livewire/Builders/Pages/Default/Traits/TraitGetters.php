@@ -53,37 +53,37 @@ trait TraitGetters
      */
     function getLayout(): ?string
     {
-        return $this->layout;
+        return $this->pageLayout();
     }
 
     /**
      * Get view name
      *
-     * @return string
+     * @return string|null
      */
-    function getView(): string
+    function getView(): ?string
     {
-        return $this->view;
+        return $this->pageView();
     }
 
     /**
      * Get page icon
      *
-     * @return string
+     * @return null|string
      */
-    function getIcon(): string
+    function getIcon(): ?string
     {
-        return $this->icon;
+        return $this->pageIcon();
     }
 
     /**
      * Get page title
      *
-     * @return string
+     * @return null|string
      */
-    function getTitle(): string
+    function getTitle(): ?string
     {
-        return $this->title;
+        return $this->pageTitle();
     }
 
     /**
@@ -93,7 +93,7 @@ trait TraitGetters
      */
     function getTitleFromBreadcrumb(): string
     {
-        return count($this->getBreadcrumb()) == 0 ? $this->getTitle() : implode(' ≫ ', array_map(function ($bread) {
+        return count($this->getBreadcrumb()) == 0 ? $this->getTitle() : implode(' » ', array_map(function ($bread) {
             return $bread['label'];
         }, $this->getBreadcrumb(true)));
     }
@@ -106,15 +106,16 @@ trait TraitGetters
      */
     function getBreadcrumb(bool $withoutHome = false): array
     {
-        if (is_null($this->breadcrumb)) {
-            $this->breadcrumb = new Breadcrumb;
+        $bread = $this->pageBreadcrumb();
+        if (is_null($bread)) {
+            $bread = new Breadcrumb;
         }
 
         if ($withoutHome) {
-            return $this->breadcrumb->getBreadcrumbWithoutHome();
+            return $bread->getBreadcrumbWithoutHome();
         }
 
-        return $this->breadcrumb->getBreadcrumb();
+        return $bread->getBreadcrumb();
     }
 
     /**

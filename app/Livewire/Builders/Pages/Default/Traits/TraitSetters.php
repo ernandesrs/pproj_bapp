@@ -10,55 +10,51 @@ trait TraitSetters
     /**
      * Set page layout
      *
-     * @param string $layout
-     * @return DefaultPage
+     * @return null|string
      */
-    function setLayout(string $layout)
+    function pageLayout()
     {
-        $this->layout = $layout;
-        return $this;
-    }
-
-    function setView(string $view)
-    {
-        $this->view = $view;
-        return $this;
+        return null;
     }
 
     /**
-     * Set page title
+     * Set page view
      *
-     * @param string $title
-     * @return DefaultPage
+     * @return null|string
      */
-    function setTitle(string $title)
+    function pageView()
     {
-        $this->title = $title;
-        return $this;
+        return null;
     }
 
     /**
      * Set page icon
      *
-     * @param string $icon
-     * @return DefaultPage
+     * @return null|string
      */
-    function setIcon(string $icon)
+    function pageIcon()
     {
-        $this->icon = $icon;
-        return $this;
+        return null;
+    }
+
+    /**
+     * Set page title
+     *
+     * @return null|string
+     */
+    function pageTitle()
+    {
+        return null;
     }
 
     /**
      * Set breadcrumb
      *
-     * @param Breadcrumb $breadcrumb
-     * @return DefaultPage
+     * @return null|Breadcrumb
      */
-    function setBreadcrumb(Breadcrumb $breadcrumb)
+    function pageBreadcrumb()
     {
-        $this->breadcrumb = $breadcrumb;
-        return $this;
+        return null;
     }
 
     /**
@@ -67,7 +63,7 @@ trait TraitSetters
      * @param string $label
      * @return DefaultPage
      */
-    function setAction(string $label, string $href, ?string $icon = null, string $color = 'primary', bool $external = false)
+    function pageAction(string $label, string $href, ?string $icon = null, string $color = 'primary', bool $external = false)
     {
         $this->actions[] = [
             'label' => $label,
