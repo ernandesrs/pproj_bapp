@@ -31,7 +31,7 @@ trait TraitSetters
      *
      * @return null|\App\Livewire\Builders\Pages\List\Table
      */
-    function pageListTable()
+    function pageTableConfig()
     {
         return null;
     }

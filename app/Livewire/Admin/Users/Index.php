@@ -40,7 +40,7 @@ class Index extends ListPage
         return User::class;
     }
 
-    function pageListTable()
+    function pageTableConfig()
     {
         return (new Table)
             ->addColumn('ID', 'id')

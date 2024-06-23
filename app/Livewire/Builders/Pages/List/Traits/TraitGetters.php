@@ -44,33 +44,8 @@ trait TraitGetters
         return $this->pageListLimit();
     }
 
-    /**
-     * Get list columns labels
-     *
-     * @return array
-     */
-    function getListColumnsLabel()
+    function getTableConfig()
     {
-        return $this->pageListTable()->getTableHeadLabels();
-    }
-
-    /**
-     * Get list columns content data
-     *
-     * @return array
-     */
-    function getListColumnsContent()
-    {
-        return $this->pageListTable()->getTableRowColumns();
-    }
-
-    /**
-     * Get list actions
-     *
-     * @return object
-     */
-    function getModelListActions()
-    {
-        return (object) $this->listActions;
+        return $this->pageTableConfig();
     }
 }

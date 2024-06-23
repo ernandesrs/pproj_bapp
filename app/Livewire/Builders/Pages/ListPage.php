@@ -26,17 +26,6 @@ class ListPage extends DefaultPage
     private mixed $listItems = null;
 
     /**
-     * List actions(show, edit, delete)
-     *
-     * @var array
-     */
-    private array $listActions = [
-        'show' => null,
-        'edit' => null,
-        'delete' => null,
-    ];
-
-    /**
      * Mount
      *
      * @return void
@@ -83,8 +72,8 @@ class ListPage extends DefaultPage
             $this->fails[] = 'Override the "pageModelClass()" public method, returning the model class.';
         }
 
-        if (is_null($this->pageListTable())) {
-            $this->fails[] = 'Override the "pageListTable(" public method, returning a instance of "App\Livewire\Builders\Pages\List\Table".';
+        if (is_null($this->pageTableConfig())) {
+            $this->fails[] = 'Override the "pageTableConfig()" public method, returning a instance of "App\Livewire\Builders\Pages\List\Table".';
         }
 
         return parent::validatePageData();

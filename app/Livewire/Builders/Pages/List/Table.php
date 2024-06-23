@@ -2,6 +2,11 @@
 
 namespace App\Livewire\Builders\Pages\List;
 
+use App\Livewire\Builders\Pages\Actions\Action;
+use App\Livewire\Builders\Pages\Actions\ActionDelete;
+use App\Livewire\Builders\Pages\Actions\ActionEdit;
+use App\Livewire\Builders\Pages\Actions\ActionShow;
+
 class Table
 {
     /**
@@ -9,7 +14,7 @@ class Table
      *
      * @var array
      */
-    private array $headLabels = [];
+    private array $columnsLabels = [];
 
     /**
      * Columns
@@ -29,7 +34,7 @@ class Table
      */
     function addColumn(string $label, ?string $key = null, ?\Closure $callback = null, ?string $view = null)
     {
-        $this->headLabels[] = [
+        $this->columnsLabels[] = [
             'label' => $label
         ];
 
@@ -47,9 +52,9 @@ class Table
      *
      * @return array
      */
-    function getTableHeadLabels()
+    function getColumnLabels()
     {
-        return $this->headLabels;
+        return $this->columnsLabels;
     }
 
     /**
@@ -57,7 +62,7 @@ class Table
      *
      * @return array
      */
-    function getTableRowColumns()
+    function getRowColumns()
     {
         return $this->columns;
     }
