@@ -5,9 +5,15 @@ namespace App\Livewire\Admin\Users;
 use App\Livewire\Builders\Pages\CreatePage;
 use App\Livewire\Builders\Breadcrumb;
 use App\Models\User;
+use App\Services\UserService;
 
 class Create extends CreatePage
 {
+    function pageModelServiceClass()
+    {
+        return UserService::class;
+    }
+
     function pageModelClass()
     {
         return User::class;

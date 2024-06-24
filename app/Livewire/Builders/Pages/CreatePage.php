@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Builders\Pages;
 
+use App\Helpers\Feedback;
 use App\Livewire\Builders\Pages\Create\Traits\TraitGetters;
 use App\Livewire\Builders\Pages\Create\Traits\TraitSetters;
 use Illuminate\Database\Eloquent\Model;
@@ -31,7 +32,22 @@ class CreatePage extends DefaultPage
      */
     function save()
     {
-        dump($this->data);
+        $modelService = $this->getModelServiceClass();
+        if (!$modelService) {
+            return;
+        }
+
+        $created = $modelService::create(
+            $this->validate($modelService::rules())
+        );
+
+        if (!$created) {
+            (new Feedback)->error('Fail on create a new user!')->dispatch($this);
+        }
+
+        (new Feedback)->success('A new user has ben created with success!')->flash();
+
+        return $this->redirect(route('admin.users.edit', ['user' => $created->id]), true);
     }
 
     /**
@@ -43,6 +59,10 @@ class CreatePage extends DefaultPage
     {
         if (empty($this->pageModelClass())) {
             $this->fails[] = 'Override the "pageModelClass()" public method, returning the model class.';
+        }
+
+        if (!is_bool($this->pageModelServiceClass()) && empty($this->pageModelServiceClass())) {
+            $this->fails[] = 'Override the "pageModelServiceClass()" public method, returning the model service class or false.';
         }
 
         return parent::validatePageData();

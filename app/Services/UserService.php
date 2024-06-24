@@ -9,6 +9,19 @@ use App\Models\User;
 class UserService extends Service
 {
     /**
+     * Create user
+     *
+     * @param array $validated
+     * @return null|User
+     */
+    static function create(array $validated = [])
+    {
+        $validated['data']['password'] = \Hash::make($validated['data']['password']);
+
+        return User::create($validated['data']);
+    }
+
+    /**
      * Update user
      *
      * @param Authenticatable|User $user
@@ -43,6 +56,7 @@ class UserService extends Service
             $rules['data.username'] = ['required', 'max:30', 'unique:users,username,' . $id];
         } else {
             $rules['data.username'] = ['required', 'max:30', 'unique:users,username'];
+            $rules['data.email'] = ['required', 'email', 'unique:users,email'];
         }
 
         return $rules;
