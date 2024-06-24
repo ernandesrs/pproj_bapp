@@ -40,13 +40,26 @@ class CreatePage extends DefaultPage
             $this->validate($modelService::rules())
         );
 
-        if (!$created) {
-            $this->feedback()->error('Fail on create!')->dispatch($this);
+        $feedback = $this->feedback();
+        if ($created) {
+            $feedback->success('Created with success!');
+
+            if ($this->getOnSuccessRedirect()) {
+                $feedback->flash();
+                return $this->redirect(($this->getOnSuccessRedirect())($created), true);
+            } else {
+                $feedback->dispatch($this);
+                return;
+            }
         }
 
-        $this->feedback()->success('Created with success!')->flash();
+        $feedback->error('Fail on create!');
+        if ($this->getOnFailRedirect()) {
+            $feedback->flash();
+            return $this->redirect(($this->getOnFailRedirect())($created), true);
+        }
 
-        return $this->redirect(route('admin.users.edit', ['user' => $created->id]), true);
+        $feedback->dispatch($this);
     }
 
     /**

@@ -9,6 +9,11 @@ use App\Services\UserService;
 
 class Create extends CreatePage
 {
+    function pageOnSuccessRedirect()
+    {
+        return fn($user) => $user ? route('admin.users.edit', ['user' => $user->id]) : route('admin.users.index');
+    }
+
     function pageModelServiceClass()
     {
         return UserService::class;

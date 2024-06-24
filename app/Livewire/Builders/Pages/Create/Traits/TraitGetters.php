@@ -23,4 +23,24 @@ trait TraitGetters
     {
         return $this->pageModelServiceClass();
     }
+
+    /**
+     * Get on success redirect
+     *
+     * @return null|\Closure
+     */
+    function getOnSuccessRedirect()
+    {
+        return $this->pageOnSuccessRedirect();
+    }
+
+    /**
+     * Get on fail redirect
+     *
+     * @return null|\Closure
+     */
+    function getOnFailRedirect()
+    {
+        return $this->pageOnFailRedirect();
+    }
 }

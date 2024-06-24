@@ -23,4 +23,24 @@ trait TraitSetters
     {
         return null;
     }
+
+    /**
+     * On success redirect
+     *
+     * @return null|\Closure A function that can receive a Model or null and must return the URL where the user will be redirected in case of success.
+     */
+    function pageOnSuccessRedirect()
+    {
+        return null;
+    }
+
+    /**
+     * On fail redirect
+     *
+     * @return null|\Closure A function that can receive a Model or null and must return the URL where the user will be redirected in case of failure.
+     */
+    function pageOnFailRedirect()
+    {
+        return null;
+    }
 }
