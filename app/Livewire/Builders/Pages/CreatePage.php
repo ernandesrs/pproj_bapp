@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Builders\Pages;
 
-use App\Helpers\Feedback;
 use App\Livewire\Builders\Pages\Create\Traits\TraitGetters;
 use App\Livewire\Builders\Pages\Create\Traits\TraitSetters;
 use Illuminate\Database\Eloquent\Model;
@@ -42,10 +41,10 @@ class CreatePage extends DefaultPage
         );
 
         if (!$created) {
-            (new Feedback)->error('Fail on create a new user!')->dispatch($this);
+            $this->feedback()->error('Fail on create a new user!')->dispatch($this);
         }
 
-        (new Feedback)->success('A new user has ben created with success!')->flash();
+        $this->feedback()->success('A new user has ben created with success!')->flash();
 
         return $this->redirect(route('admin.users.edit', ['user' => $created->id]), true);
     }

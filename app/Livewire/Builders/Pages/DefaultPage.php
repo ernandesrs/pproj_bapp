@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Builders\Pages;
 
+use App\Helpers\Feedback;
 use App\Livewire\Builders\Pages\Default\Traits\TraitGetters;
 use App\Livewire\Builders\Pages\Default\Traits\TraitSetters;
 use Livewire\Component;
@@ -50,6 +51,16 @@ class DefaultPage extends Component
             ->layout('livewire..' . ((empty($this->getLayout())) ? 'layouts.layout1' : $this->getLayout()), [
                 'title' => $this->getTitleFromBreadcrumb()
             ]);
+    }
+
+    /**
+     * Feedback instance
+     *
+     * @return Feedback
+     */
+    function feedback()
+    {
+        return (new Feedback)->timer(10000);
     }
 
     /**
