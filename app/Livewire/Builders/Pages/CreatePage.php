@@ -25,6 +25,16 @@ class CreatePage extends DefaultPage
     public array $data = [];
 
     /**
+     * Save data on database
+     *
+     * @return void
+     */
+    function save()
+    {
+        dump($this->data);
+    }
+
+    /**
      * Validate page list data
      *
      * @return void

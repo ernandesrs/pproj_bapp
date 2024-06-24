@@ -11,7 +11,7 @@
 <form wire:submit.prevent="{{ $submitTo }}" {{ $attributes }}>
     {{ $slot }}
 
-    <div class="w-full flex items-center justify-center mt-2">
+    <div class="w-full flex items-center justify-center mt-8">
         @isset($submit)
             {{ $submit }}
         @else

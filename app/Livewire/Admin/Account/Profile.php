@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Account;
 
 use App\Models\User;
 use Illuminate\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
@@ -19,6 +20,13 @@ class Profile extends Component
     public Authenticatable|User $user;
 
     /**
+     * Model
+     *
+     * @var null|Model
+     */
+    public null|Model $model = null;
+
+    /**
      * Data
      *
      * @var array
@@ -27,7 +35,7 @@ class Profile extends Component
 
     function boot()
     {
-        $this->user = \Auth::user();
+        $this->model = $this->user = \Auth::user();
         $this->data = $this->user->toArray();
     }
 

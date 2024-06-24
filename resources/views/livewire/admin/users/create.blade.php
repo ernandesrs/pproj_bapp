@@ -1,5 +1,13 @@
 <x-common.layout.page-base>
-    <p>
-        CREATE
-    </p>
+    <x-common.content-block
+        title="User data"
+        class="flex justify-center">
+
+        <x-admin.form.base
+            submitTo="save"
+            class="basis-full">
+            @include('livewire.admin.includes.user-basic-data')
+        </x-admin.form.base>
+
+    </x-common.content-block>
 </x-common.layout.page-base>
