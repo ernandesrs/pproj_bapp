@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Account;
 
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
@@ -51,19 +52,12 @@ class Profile extends Component
      */
     public function update()
     {
-        $validated = $this->validate([
-            'data.first_name' => ['required', 'max:30'],
-            'data.last_name' => ['required', 'max:70'],
-            'data.username' => ['required', 'max:30', 'unique:users,username,' . $this->user->id],
-            'data.gender' => ['required', Rule::in(['n', 'm', 'f'])],
-            'data.password' => ['string', 'confirmed']
-        ]);
+        $updated = UserService::update(
+            $this->user,
+            $this->validate(UserService::rules($this->user->id))
+        );
 
-        if (isset($validated['data']['password'])) {
-            $validated['data']['password'] = \Hash::make($validated['data']['password']);
-        }
-
-        if (!$this->user->update($validated['data'])) {
+        if (!$updated) {
             (new \App\Helpers\Feedback())
                 ->error('Fail on udpate')
                 ->timer(10000)
