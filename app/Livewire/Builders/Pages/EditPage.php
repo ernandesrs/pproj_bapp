@@ -41,11 +41,25 @@ class EditPage extends DefaultPage
             $this->validate($modelService::rules($this->model->id))
         );
 
-        if (!$updated) {
-            $this->feedback()->error('Fail on update!')->dispatch($this);
+        $feedback = $this->feedback();
+        if ($updated) {
+            $feedback->success('Success on update!');
+            if ($this->getOnSuccessRedirect()) {
+                $feedback->flash();
+                return $this->redirect(($this->getOnSuccessRedirect())($updated), true);
+            } else {
+                $feedback->dispatch($this);
+                return;
+            }
         }
 
-        $this->feedback()->success('Success on update!')->dispatch($this);
+        $feedback->error('Fail on update!');
+        if ($this->getOnFailRedirect()) {
+            $feedback->flash();
+            return $this->redirect(($this->getOnFailRedirect())($updated), true);
+        }
+
+        $feedback->dispatch($this);
     }
 
     /**
