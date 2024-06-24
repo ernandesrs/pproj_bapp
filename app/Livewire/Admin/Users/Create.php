@@ -2,10 +2,11 @@
 
 namespace App\Livewire\Admin\Users;
 
-use App\Livewire\Builders\Pages\DefaultPage;
+use App\Livewire\Builders\Pages\CreatePage;
 use App\Livewire\Builders\Breadcrumb;
+use App\Models\User;
 
-class Create extends DefaultPage
+class Create extends CreatePage
 {
     function pageLayout()
     {
@@ -32,5 +33,10 @@ class Create extends DefaultPage
         return (new Breadcrumb)
             ->addItem('Users', 'people-fill', route('admin.users.index'))
             ->addItem('Create', 'person-fill-add', route('admin.users.create'));
+    }
+
+    function pageModelClass()
+    {
+        return User::class;
     }
 }

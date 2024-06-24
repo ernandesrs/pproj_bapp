@@ -2,13 +2,13 @@
 
 namespace App\Livewire\Builders\Pages;
 
-use App\Livewire\Builders\Pages\Edit\Traits\TraitGetters;
-use App\Livewire\Builders\Pages\Edit\Traits\TraitSetters;
+use App\Livewire\Builders\Pages\Create\Traits\TraitGetters;
+use App\Livewire\Builders\Pages\Create\Traits\TraitSetters;
 use Illuminate\Database\Eloquent\Model;
 
-class EditPage extends DefaultPage
+class CreatePage extends DefaultPage
 {
-    use TraitSetters, TraitGetters;
+    use TraitGetters, TraitSetters;
 
     /**
      * Model
@@ -33,14 +33,6 @@ class EditPage extends DefaultPage
     {
         if (empty($this->pageModelClass())) {
             $this->fails[] = 'Override the "pageModelClass()" public method, returning the model class.';
-        }
-
-        if (empty($this->model)) {
-            $this->fails[] = 'Load your model using the Livewire "mount()" public method.    ';
-        }
-
-        if (!$this->model instanceof (new ($this->pageModelClass())())) {
-            $this->fails[] = 'The public property "model" expects an instance of "' . $this->pageModelClass() . '", "' . $this->model::class . '" has been defined.';
         }
 
         return parent::validatePageData();
