@@ -2,13 +2,14 @@
 
 namespace App\Livewire\Builders\Pages;
 
+use App\Livewire\Builders\Pages\Edit\Traits\TraitResponse;
 use App\Livewire\Builders\Pages\Edit\Traits\TraitGetters;
 use App\Livewire\Builders\Pages\Edit\Traits\TraitSetters;
 use Illuminate\Database\Eloquent\Model;
 
 class EditPage extends DefaultPage
 {
-    use TraitSetters, TraitGetters;
+    use TraitSetters, TraitGetters, TraitResponse;
 
     /**
      * Model
@@ -41,25 +42,7 @@ class EditPage extends DefaultPage
             $this->validate($modelService::rules($this->model->id))
         );
 
-        $feedback = $this->feedback();
-        if ($updated) {
-            $feedback->success('Success on update!');
-            if ($this->getOnSuccessRedirect()) {
-                $feedback->flash();
-                return $this->redirect(($this->getOnSuccessRedirect())($updated), true);
-            } else {
-                $feedback->dispatch($this);
-                return;
-            }
-        }
-
-        $feedback->error('Fail on update!');
-        if ($this->getOnFailRedirect()) {
-            $feedback->flash();
-            return $this->redirect(($this->getOnFailRedirect())($updated), true);
-        }
-
-        $feedback->dispatch($this);
+        return $this->responseToUpdate($updated);
     }
 
     /**
