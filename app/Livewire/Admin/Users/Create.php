@@ -8,24 +8,9 @@ use App\Models\User;
 
 class Create extends CreatePage
 {
-    function pageLayout()
+    function pageModelClass()
     {
-        return 'admin.layouts.layout1';
-    }
-
-    function pageView()
-    {
-        return 'admin.users.create';
-    }
-
-    function pageIcon()
-    {
-        return 'person-fill-add';
-    }
-
-    function pageTitle()
-    {
-        return 'Create user';
+        return User::class;
     }
 
     function pageBreadcrumb()
@@ -35,8 +20,23 @@ class Create extends CreatePage
             ->addItem('Create', 'person-fill-add', route('admin.users.create'));
     }
 
-    function pageModelClass()
+    function pageTitle()
     {
-        return User::class;
+        return 'Create user';
+    }
+
+    function pageIcon()
+    {
+        return 'person-fill-add';
+    }
+
+    function pageView()
+    {
+        return 'admin.users.create';
+    }
+
+    function pageLayout()
+    {
+        return 'admin.layouts.layout1';
     }
 }

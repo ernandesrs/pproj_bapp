@@ -8,24 +8,14 @@ use App\Models\User;
 
 class Edit extends EditPage
 {
-    function pageLayout()
+    function mount(User $user)
     {
-        return 'admin.layouts.layout1';
+        $this->model = $this->user = $user;
     }
 
-    function pageView()
+    function pageModelClass()
     {
-        return 'admin.users.edit';
-    }
-
-    function pageIcon()
-    {
-        return 'person-fill-gear';
-    }
-
-    function pageTitle()
-    {
-        return 'Edit user';
+        return User::class;
     }
 
     function pageBreadcrumb()
@@ -35,13 +25,23 @@ class Edit extends EditPage
             ->addItem('Edit user', 'person-fill-gear', route('admin.users.index'));
     }
 
-    function pageModelClass()
+    function pageTitle()
     {
-        return User::class;
+        return 'Edit user';
     }
 
-    function mount(User $user)
+    function pageIcon()
     {
-        $this->model = $this->user = $user;
+        return 'person-fill-gear';
+    }
+
+    function pageView()
+    {
+        return 'admin.users.edit';
+    }
+
+    function pageLayout()
+    {
+        return 'admin.layouts.layout1';
     }
 }

@@ -11,35 +11,12 @@ use App\Models\User;
 
 class Index extends ListPage
 {
-    function pageLayout()
+    function pageListActions()
     {
-        return 'admin.layouts.layout1';
-    }
-
-    function pageView()
-    {
-        return 'admin.users.index';
-    }
-
-    function pageIcon()
-    {
-        return 'people-fill';
-    }
-
-    function pageTitle()
-    {
-        return 'Users';
-    }
-
-    function pageBreadcrumb()
-    {
-        return (new Breadcrumb)
-            ->addItem('Users', 'people-fill', route('admin.users.index'));
-    }
-
-    function pageModelClass()
-    {
-        return User::class;
+        return (new ListAction)
+            ->addEdit(
+                ActionEdit::route('admin.users.edit', ['user' => 'id'])
+            );
     }
 
     function pageTableConfig()
@@ -51,11 +28,34 @@ class Index extends ListPage
             ->addColumn('E-mail', 'email');
     }
 
-    function pageListActions()
+    function pageModelClass()
     {
-        return (new ListAction)
-            ->addEdit(
-                ActionEdit::route('admin.users.edit', ['user' => 'id'])
-            );
+        return User::class;
+    }
+
+    function pageBreadcrumb()
+    {
+        return (new Breadcrumb)
+            ->addItem('Users', 'people-fill', route('admin.users.index'));
+    }
+
+    function pageTitle()
+    {
+        return 'Users';
+    }
+
+    function pageIcon()
+    {
+        return 'people-fill';
+    }
+
+    function pageView()
+    {
+        return 'admin.users.index';
+    }
+
+    function pageLayout()
+    {
+        return 'admin.layouts.layout1';
     }
 }
