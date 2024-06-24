@@ -28,11 +28,11 @@ class DefaultPage extends Component
     protected array $actions = [];
 
     /**
-     * Mount
+     * Boot
      *
      * @return void
      */
-    function mount()
+    function boot()
     {
         $this->type = 'default';
     }

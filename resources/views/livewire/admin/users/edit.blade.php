@@ -1,3 +1,3 @@
 <x-common.layout.page-base>
-    @dump($user)
+    @dump($model->first_name . ' ' . $model->last_name)
 </x-common.layout.page-base>

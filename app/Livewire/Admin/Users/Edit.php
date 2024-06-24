@@ -3,18 +3,11 @@
 namespace App\Livewire\Admin\Users;
 
 use App\Livewire\Builders\Breadcrumb;
-use App\Livewire\Builders\Pages\DefaultPage;
+use App\Livewire\Builders\Pages\EditPage;
 use App\Models\User;
 
-class Edit extends DefaultPage
+class Edit extends EditPage
 {
-    public User $user;
-
-    function boot(User $user)
-    {
-        $this->user = $user;
-    }
-
     function pageLayout()
     {
         return 'admin.layouts.layout1';
@@ -40,5 +33,15 @@ class Edit extends DefaultPage
         return (new Breadcrumb)
             ->addItem('Users', 'people-fill', route('admin.users.index'))
             ->addItem('Edit user', 'person-fill-gear', route('admin.users.index'));
+    }
+
+    function pageModelClass()
+    {
+        return User::class;
+    }
+
+    function mount(User $user)
+    {
+        $this->model = $this->user = $user;
     }
 }

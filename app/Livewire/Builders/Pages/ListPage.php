@@ -26,11 +26,11 @@ class ListPage extends DefaultPage
     private mixed $listItems = null;
 
     /**
-     * Mount
+     * Boot
      *
      * @return void
      */
-    function mount()
+    function boot()
     {
         $this->type = 'list';
     }
