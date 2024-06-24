@@ -5,12 +5,19 @@ namespace App\Livewire\Admin\Users;
 use App\Livewire\Builders\Breadcrumb;
 use App\Livewire\Builders\Pages\EditPage;
 use App\Models\User;
+use App\Services\UserService;
 
 class Edit extends EditPage
 {
     function mount(User $user)
     {
         $this->model = $this->user = $user;
+        $this->data = $user->toArray();
+    }
+
+    function pageModelServiceClass()
+    {
+        return UserService::class;
     }
 
     function pageModelClass()

@@ -25,6 +25,30 @@ class EditPage extends DefaultPage
     public array $data = [];
 
     /**
+     * Update model data
+     *
+     * @return void
+     */
+    function update()
+    {
+        $modelService = $this->getModelServiceClass();
+        if (!$modelService) {
+            return;
+        }
+
+        $updated = $modelService::update(
+            $this->model,
+            $this->validate($modelService::rules($this->model->id))
+        );
+
+        if (!$updated) {
+            $this->feedback()->error('Fail on update!')->dispatch($this);
+        }
+
+        $this->feedback()->success('Success on update!')->dispatch($this);
+    }
+
+    /**
      * Validate page list data
      *
      * @return void
@@ -33,6 +57,10 @@ class EditPage extends DefaultPage
     {
         if (empty($this->pageModelClass())) {
             $this->fails[] = 'Override the "pageModelClass()" public method, returning the model class.';
+        }
+
+        if (!is_bool($this->pageModelServiceClass()) && empty($this->pageModelServiceClass())) {
+            $this->fails[] = 'Override the "pageModelServiceClass()" public method, returning the model service class or false.';
         }
 
         if (empty($this->model)) {

@@ -41,10 +41,10 @@ class CreatePage extends DefaultPage
         );
 
         if (!$created) {
-            $this->feedback()->error('Fail on create a new user!')->dispatch($this);
+            $this->feedback()->error('Fail on create!')->dispatch($this);
         }
 
-        $this->feedback()->success('A new user has ben created with success!')->flash();
+        $this->feedback()->success('Created with success!')->flash();
 
         return $this->redirect(route('admin.users.edit', ['user' => $created->id]), true);
     }
