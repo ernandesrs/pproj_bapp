@@ -14,4 +14,14 @@ class ActionEdit extends Action
     {
         return new Action('route', $fn);
     }
+
+    /**
+     * Own action: the listing page itself will handle the deletion
+     *
+     * @return ActionEdit
+     */
+    static function ownAction()
+    {
+        return new Action('own_action');
+    }
 }

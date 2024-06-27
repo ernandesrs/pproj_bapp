@@ -24,7 +24,7 @@ class Action
      * @param \Closure $fn
      * @return Action
      */
-    function __construct(string $type, \Closure $fn)
+    function __construct(string $type, ?\Closure $fn = null)
     {
         $this->type = $type;
         $this->routeClosure = $fn;
@@ -33,5 +33,10 @@ class Action
     function typeIsRoute()
     {
         return $this->type == 'route';
+    }
+
+    function typeIsOwnAction()
+    {
+        return $this->type == 'own_action';
     }
 }

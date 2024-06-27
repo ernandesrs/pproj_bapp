@@ -64,19 +64,48 @@ class ListPage extends DefaultPage
      */
     function edit(int $id)
     {
-        $routeEdit = $this->getListActions()->getEdit();
-
-        $model = $this->getModelInstance()->where("id", $id)->firstOrFail();
-
-        if (!$routeEdit) {
+        $actionEdit = $this->getListActions()->getEdit();
+        if (!$actionEdit) {
             return;
         }
 
-        if ($routeEdit->typeIsRoute()) {
-            return $this->redirect(($routeEdit->routeClosure)($model), true);
+        $model = $this->getModelInstance()->where("id", $id)->firstOrFail();
+        if ($actionEdit->typeIsRoute()) {
+            return $this->redirect(($actionEdit->routeClosure)($model), true);
         }
 
         return;
+    }
+
+    /**
+     * Delete item
+     *
+     * @param int $id
+     * @return mixed
+     */
+    function delete(int $id)
+    {
+        $actionDelete = $this->getListActions()->getDelete();
+
+        if (!$actionDelete) {
+            return;
+        }
+
+        $model = $this->getModelInstance()->where("id", $id)->firstOrFail();
+
+        if ($actionDelete->typeIsRoute()) {
+            return $this->redirect(($actionDelete->routeClosure)($model), true);
+        }
+
+        if ($actionDelete->typeIsOwnAction()) {
+            $feedback = $this->feedback()->success("Success on delete.");
+
+            if (!$model->delete()) {
+                $feedback->error('Fail on delete.');
+            }
+
+            $feedback->dispatch($this);
+        }
     }
 
     /**
