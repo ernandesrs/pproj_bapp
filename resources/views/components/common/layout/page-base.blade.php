@@ -115,7 +115,7 @@
             </div>
 
             <div class="w-full flex justify-content-center mt-3">
-                {{ $this->getListitems()->links() }}
+                {{ $this->getListitems()->onEachSide(1)->links() }}
             </div>
         @else
             {{ $slot }}

@@ -13,7 +13,7 @@ class Index extends ListPage
     function pageListActions()
     {
         return (new ListAction)
-            ->addEdit(\App\Livewire\Builders\Pages\Actions\ActionEdit::route(fn($user) => route('admin.users.edit', ['user' => $user->id])))
+            ->addEdit(\App\Livewire\Builders\Pages\Actions\ActionEdit::route(fn($id) => route('admin.users.edit', ['user' => $id])))
             ->addDelete(\App\Livewire\Builders\Pages\Actions\ActionDelete::ownAction());
     }
 

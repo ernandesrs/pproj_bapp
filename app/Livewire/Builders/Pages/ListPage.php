@@ -6,10 +6,11 @@ use App\Livewire\Builders\Pages\DefaultPage;
 use App\Livewire\Builders\Pages\List\Traits\TraitGetters;
 use App\Livewire\Builders\Pages\List\Traits\TraitSetters;
 use Illuminate\Database\Eloquent\Model;
+use Livewire\WithPagination;
 
 class ListPage extends DefaultPage
 {
-    use TraitGetters, TraitSetters;
+    use TraitGetters, TraitSetters, WithPagination;
 
     /**
      * Model instance
@@ -52,7 +53,7 @@ class ListPage extends DefaultPage
      */
     function loadListItems()
     {
-        $this->listItems = $this->getModelInstance()->paginate($this->getListLimit())->withQueryString();
+        $this->listItems = $this->getModelInstance()->paginate($this->getListLimit());
         return $this;
     }
 
@@ -69,9 +70,8 @@ class ListPage extends DefaultPage
             return;
         }
 
-        $model = $this->getModelInstance()->where("id", $id)->firstOrFail();
         if ($actionEdit->typeIsRoute()) {
-            return $this->redirect(($actionEdit->routeClosure)($model), true);
+            return $this->redirect(($actionEdit->routeClosure)($id), true);
         }
 
         return;
@@ -86,20 +86,17 @@ class ListPage extends DefaultPage
     function delete(int $id)
     {
         $actionDelete = $this->getListActions()->getDelete();
-
         if (!$actionDelete) {
             return;
         }
 
-        $model = $this->getModelInstance()->where("id", $id)->firstOrFail();
-
         if ($actionDelete->typeIsRoute()) {
-            return $this->redirect(($actionDelete->routeClosure)($model), true);
+            return $this->redirect(($actionDelete->routeClosure)($id), true);
         }
 
         if ($actionDelete->typeIsOwnAction()) {
+            $model = $this->getModelInstance()->where("id", $id)->firstOrFail();
             $feedback = $this->feedback()->success("Success on delete.");
-
             if (!$model->delete()) {
                 $feedback->error('Fail on delete.');
             }
