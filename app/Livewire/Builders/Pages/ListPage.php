@@ -57,6 +57,18 @@ class ListPage extends DefaultPage
         return $this;
     }
 
+    function show(int $id)
+    {
+        $actionShow = $this->getListActions()->getShow();
+        if (!$actionShow) {
+            return;
+        }
+
+        if ($actionShow->typeIsRoute()) {
+            return $this->redirect(($actionShow->routeClosure)($id), true);
+        }
+    }
+
     /**
      * Edit item
      *
