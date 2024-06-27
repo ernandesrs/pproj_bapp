@@ -3,6 +3,7 @@
 namespace App\Livewire\Builders\Pages\Default\Traits;
 
 use App\Livewire\Builders\Breadcrumb;
+use App\Livewire\Builders\Pages\Default\PageAction;
 
 trait TraitGetters
 {
@@ -121,11 +122,11 @@ trait TraitGetters
     /**
      * Get button actions
      *
-     * @return array
+     * @return null|PageAction
      */
-    function getActions(): array
+    function getActions(): null|PageAction
     {
-        return $this->actions;
+        return $this->pageActions();
     }
 
     /**
@@ -135,7 +136,7 @@ trait TraitGetters
      */
     function hasActions(): bool
     {
-        return count($this->actions) > 0;
+        return $this->getActions() ? $this->getActions()->hasActions() : false;
     }
 }
 

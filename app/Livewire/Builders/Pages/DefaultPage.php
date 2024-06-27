@@ -22,13 +22,6 @@ class DefaultPage extends Component
     protected string $type = 'default';
 
     /**
-     * Button actions
-     *
-     * @var array
-     */
-    protected array $actions = [];
-
-    /**
      * Boot
      *
      * @return void

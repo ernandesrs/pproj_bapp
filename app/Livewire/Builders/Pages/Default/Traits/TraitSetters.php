@@ -3,6 +3,7 @@
 namespace App\Livewire\Builders\Pages\Default\Traits;
 
 use App\Livewire\Builders\Breadcrumb;
+use App\Livewire\Builders\Pages\Default\PageAction;
 use App\Livewire\Builders\Pages\DefaultPage;
 
 trait TraitSetters
@@ -60,18 +61,10 @@ trait TraitSetters
     /**
      * Set page action
      *
-     * @param string $label
-     * @return DefaultPage
+     * @return null|PageAction
      */
-    function pageAction(string $label, string $href, ?string $icon = null, string $color = 'primary', bool $external = false)
+    function pageActions()
     {
-        $this->actions[] = [
-            'label' => $label,
-            'href' => $href,
-            'icon' => $icon,
-            'color' => $color,
-            'external' => $external
-        ];
-        return $this;
+        return null;
     }
 }

@@ -33,6 +33,12 @@ class Index extends ListPage
         return User::class;
     }
 
+    function pageActions()
+    {
+        return (new \App\Livewire\Builders\Pages\Default\PageAction)
+            ->addAction('New user', route('admin.users.create'), 'person-fill-add');
+    }
+
     function pageBreadcrumb()
     {
         return (new Breadcrumb)

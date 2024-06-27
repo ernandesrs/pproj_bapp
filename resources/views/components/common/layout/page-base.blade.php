@@ -20,7 +20,7 @@
             {{-- actions --}}
             @if ($this->hasActions())
                 <div class="flex items-center ml-auto">
-                    @foreach ($this->getActions() as $action)
+                    @foreach ($this->getActions()->getActions() as $action)
                         <x-common.clickable
                             prepend-icon="{{ $action['icon'] }}"
                             label="{{ $action['label'] }}"
