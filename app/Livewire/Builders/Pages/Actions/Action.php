@@ -4,23 +4,30 @@ namespace App\Livewire\Builders\Pages\Actions;
 
 class Action
 {
+    /**
+     * Type
+     *
+     * @var string|null
+     */
     public ?string $type = null;
-    public ?string $name = null;
-    public array $params = [];
+
+    /**
+     * Closure to get route
+     *
+     * @var \Closure|null
+     */
+    public ?\Closure $routeClosure = null;
 
     /**
      * Set action route
      *
-     * @param string $type action type
-     * @param string $name route name
-     * @param array $params route params
+     * @param \Closure $fn
      * @return Action
      */
-    function __construct(string $type, string $name, array $params = [])
+    function __construct(string $type, \Closure $fn)
     {
         $this->type = $type;
-        $this->name = $name;
-        $this->params = $params;
+        $this->routeClosure = $fn;
     }
 
     function typeIsRoute()

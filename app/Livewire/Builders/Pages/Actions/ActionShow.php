@@ -7,13 +7,12 @@ class ActionShow extends Action
     /**
      * Set action edit route
      *
-     * @param string $name route name
-     * @param array $params route params
+     * @param \Closure $fn
      *
      * @return ActionShow
      */
-    static function route(string $name, array $params = [])
+    static function route(\Closure $fn)
     {
-        return new Action('route', $name, $params);
+        return new Action('route', $fn);
     }
 }

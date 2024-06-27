@@ -66,18 +66,14 @@ class ListPage extends DefaultPage
     {
         $routeEdit = $this->getListActions()->getEdit();
 
+        $model = $this->getModelInstance()->where("id", $id)->firstOrFail();
+
         if (!$routeEdit) {
             return;
         }
 
-        foreach ($routeEdit->params as $k => $p) {
-            if ($p == 'id') {
-                $routeEdit->params[$k] = $id;
-            }
-        }
-
         if ($routeEdit->typeIsRoute()) {
-            return $this->redirect(route($routeEdit->name, $routeEdit->params), true);
+            return $this->redirect(($routeEdit->routeClosure)($model), true);
         }
 
         return;

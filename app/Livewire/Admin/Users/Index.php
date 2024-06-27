@@ -3,7 +3,6 @@
 namespace App\Livewire\Admin\Users;
 
 use App\Livewire\Builders\Breadcrumb;
-use App\Livewire\Builders\Pages\Actions\ActionEdit;
 use App\Livewire\Builders\Pages\List\ListAction;
 use App\Livewire\Builders\Pages\List\Table;
 use App\Livewire\Builders\Pages\ListPage;
@@ -14,9 +13,7 @@ class Index extends ListPage
     function pageListActions()
     {
         return (new ListAction)
-            ->addEdit(
-                ActionEdit::route('admin.users.edit', ['user' => 'id'])
-            );
+            ->addEdit(\App\Livewire\Builders\Pages\Actions\ActionEdit::route(fn($user) => route('admin.users.edit', ['user' => $user->id])));
     }
 
     function pageTableConfig()
