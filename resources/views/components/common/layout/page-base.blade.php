@@ -6,16 +6,54 @@
     {{-- page header --}}
     @if (!$this->typeIsBlank())
         <div class="flex items-center py-3 mb-5">
-            {{-- title --}}
-            @if ($this->getTitle())
-                <div class="flex items-center text-xl text-gray-700">
-                    @if (!empty($this->getIcon()))
-                        <x-common.icon name="{{ $this->getIcon() }}" class="mr-2" />
-                    @endif
-                    <div class="font-semibold">{{ $this->getTitle() }}</div>
-                </div>
-            @endif
-            {{-- /title --}}
+            <div>
+                {{-- title --}}
+                @if ($this->getTitle())
+                    <div class="flex items-center text-xl text-gray-700">
+                        @if (!empty($this->getIcon()))
+                            <x-common.icon name="{{ $this->getIcon() }}" class="mr-2" />
+                        @endif
+                        <div class="font-semibold">{{ $this->getTitle() }}</div>
+                    </div>
+                @endif
+                {{-- /title --}}
+
+                {{-- /breadcrumb --}}
+                @if ($this->getBreadcrumb(true))
+                    <nav class="mt-4" aria-label="Breadcrumb">
+                        <ol class="flex items-center gap-1 text-sm text-gray-500">
+                            @php
+                                $breadcrumbs = $this->getBreadcrumb(false);
+                                $total = count($breadcrumbs);
+                            @endphp
+                            @foreach ($breadcrumbs as $key => $bread)
+                                <li>
+                                    <a wire:navigate href="{{ $bread['href'] }}" class="block transition hover:text-gray-700">
+                                        <span> {{ $bread['label'] }} </span>
+                                    </a>
+                                </li>
+
+                                {{-- arrow icon --}}
+                                @if ($key + 1 < $total)
+                                    <li class="rtl:rotate-180">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="h-4 w-4"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor">
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ol>
+                    </nav>
+                @endif
+                {{-- /breadcrumb --}}
+            </div>
 
             {{-- actions --}}
             @if ($this->hasActions())

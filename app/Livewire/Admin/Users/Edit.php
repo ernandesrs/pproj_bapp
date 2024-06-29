@@ -29,7 +29,7 @@ class Edit extends EditPage
     {
         return (new Breadcrumb)
             ->addItem('Users', 'people-fill', route('admin.users.index'))
-            ->addItem('Edit user', 'person-fill-gear', route('admin.users.index'));
+            ->addItem('Edit user', 'person-fill-gear', route('admin.users.edit', ['user' => $this->model->id]));
     }
 
     function pageTitle()

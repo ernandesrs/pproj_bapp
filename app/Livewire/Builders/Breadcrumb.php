@@ -36,7 +36,8 @@ class Breadcrumb
      */
     public function getBreadcrumb()
     {
-        $homeRouteName = \Str::replace('/', '', \Route::getCurrentRoute()->getPrefix()) . '.home';
+        $prefix = preg_match('/^(admin|customer|auth)\.(.*)/', \Route::currentRouteName(), $matches) ? $matches[1] : '';
+        $homeRouteName = $prefix . '.home';
 
         $breads = $this->data;
 
