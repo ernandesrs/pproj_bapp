@@ -57,7 +57,7 @@ trait TraitGetters
     /**
      * Get list item actions(show, edit, delete)
      *
-     * @return null|\App\Livewire\Builders\Pages\List\ListAction
+     * @return null|\App\Livewire\Builders\Pages\Actions\ListAction
      */
     function getListActions()
     {

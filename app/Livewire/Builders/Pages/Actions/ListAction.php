@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Livewire\Builders\Pages\List;
+namespace App\Livewire\Builders\Pages\Actions;
 
-use App\Livewire\Builders\Pages\Actions\Action;
-use App\Livewire\Builders\Pages\Actions\ActionDelete;
-use App\Livewire\Builders\Pages\Actions\ActionEdit;
-use App\Livewire\Builders\Pages\Actions\ActionShow;
+use App\Livewire\Builders\Pages\Actions\ListActions\Action;
+use App\Livewire\Builders\Pages\Actions\ListActions\ActionDelete;
+use App\Livewire\Builders\Pages\Actions\ListActions\ActionEdit;
+use App\Livewire\Builders\Pages\Actions\ListActions\ActionShow;
 
 class ListAction
 {

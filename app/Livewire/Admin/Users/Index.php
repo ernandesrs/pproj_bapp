@@ -3,7 +3,6 @@
 namespace App\Livewire\Admin\Users;
 
 use App\Livewire\Builders\Breadcrumb;
-use App\Livewire\Builders\Pages\List\ListAction;
 use App\Livewire\Builders\Pages\List\Table;
 use App\Livewire\Builders\Pages\ListPage;
 use App\Models\User;
@@ -12,9 +11,9 @@ class Index extends ListPage
 {
     function pageListActions()
     {
-        return (new ListAction)
-            ->addEdit(\App\Livewire\Builders\Pages\Actions\ActionEdit::route(fn($id) => route('admin.users.edit', ['user' => $id])))
-            ->addDelete(\App\Livewire\Builders\Pages\Actions\ActionDelete::ownAction());
+        return (new \App\Livewire\Builders\Pages\Actions\ListAction)
+            ->addEdit(\App\Livewire\Builders\Pages\Actions\ListActions\ActionEdit::route(fn($id) => route('admin.users.edit', ['user' => $id])))
+            ->addDelete(\App\Livewire\Builders\Pages\Actions\ListActions\ActionDelete::ownAction());
     }
 
     function pageTableConfig()
@@ -33,7 +32,7 @@ class Index extends ListPage
 
     function pageActions()
     {
-        return (new \App\Livewire\Builders\Pages\Default\PageAction)
+        return (new \App\Livewire\Builders\Pages\Actions\PageAction)
             ->addAction('New user', route('admin.users.create'), 'person-fill-add');
     }
 

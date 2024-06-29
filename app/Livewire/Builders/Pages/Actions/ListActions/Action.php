@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Builders\Pages\Actions;
+namespace App\Livewire\Builders\Pages\Actions\ListActions;
 
 class Action
 {

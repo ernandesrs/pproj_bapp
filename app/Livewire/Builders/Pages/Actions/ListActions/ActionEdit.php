@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Livewire\Builders\Pages\Actions;
+namespace App\Livewire\Builders\Pages\Actions\ListActions;
 
-class ActionDelete extends Action
+class ActionEdit extends Action
 {
     /**
      * Set action edit route
      *
      * @param \Closure $fn
-     * @return ActionDelete
+     * @return ActionEdit
      */
     static function route(\Closure $fn)
     {
@@ -18,7 +18,7 @@ class ActionDelete extends Action
     /**
      * Own action: the listing page itself will handle the deletion
      *
-     * @return ActionDelete
+     * @return ActionEdit
      */
     static function ownAction()
     {

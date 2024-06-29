@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Builders\Pages\Default;
+namespace App\Livewire\Builders\Pages\Actions;
 
 class PageAction
 {

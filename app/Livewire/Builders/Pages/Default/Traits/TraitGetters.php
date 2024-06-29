@@ -3,7 +3,7 @@
 namespace App\Livewire\Builders\Pages\Default\Traits;
 
 use App\Livewire\Builders\Breadcrumb;
-use App\Livewire\Builders\Pages\Default\PageAction;
+use App\Livewire\Builders\Pages\Actions\PageAction;
 
 trait TraitGetters
 {

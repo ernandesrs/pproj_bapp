@@ -37,7 +37,7 @@ trait TraitSetters
     /**
      * Set list actions
      *
-     * @return null|\App\Livewire\Builders\Pages\List\ListAction
+     * @return null|\App\Livewire\Builders\Pages\Actions\ListAction
      */
     function pageListActions()
     {
