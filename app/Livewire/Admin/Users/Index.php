@@ -12,8 +12,8 @@ class Index extends ListPage
     function pageListActions()
     {
         return (new \App\Livewire\Builders\Pages\Actions\ListAction)
-            ->addEdit(\App\Livewire\Builders\Pages\Actions\ListActions\ActionEdit::route(fn($id) => route('admin.users.edit', ['user' => $id])))
-            ->addDelete(\App\Livewire\Builders\Pages\Actions\ListActions\ActionDelete::ownAction());
+            ->addEdit(fn($id) => route('admin.users.edit', ['user' => $id]))
+            ->addDelete();
     }
 
     function pageTableConfig()

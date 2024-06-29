@@ -10,89 +10,134 @@ use App\Livewire\Builders\Pages\Actions\ListActions\ActionShow;
 class ListAction
 {
     /**
-     * Action show
+     * List actions
      *
-     * @var null|Action|ActionShow
+     * * show
+     *   - por ser uma fn recebendo um id e retornando uma rota para realizar o direcionamento;
+     *   - pode ser um action customizado(ignorar por enquanto)
+     * * edit
+     *   - por ser uma fn recebendo um id e retornando uma rota para realizar o direcionamento;
+     *   - pode ser um action customizado(ignorar por enquanto)
+     * * delete
+     *   - por ser uma fn recebendo um id e retornando uma rota para realizar o direcionamento;
+     *   - pode ser o action da propria lista
+     *   - pode ser um action customizado(ignorar por enquanto)
+     *
+     * @var array
      */
-    private null|Action|ActionShow $show = null;
+    private array $actions = [
+        'show' => null,
+        'edit' => null,
+        'delete' => null,
+    ];
 
     /**
-     * Action edit
+     * Add action
      *
-     * @var null|Action|ActionEdit
-     */
-    private null|Action|ActionEdit $edit = null;
-
-    /**
-     * Action delete
-     *
-     * @var null|Action|ActionDelete
-     */
-    private null|Action|ActionDelete $delete = null;
-
-    /**
-     * Add a action show
-     *
-     * @param Action|ActionShow $show
+     * @param string $action
+     * @param ListActionTypes $actionType
+     * @param \Closure|null $closure
+     * @param string|null $actionMethod
      * @return ListAction
      */
-    function addShow(Action|ActionShow $show)
-    {
-        $this->show = $show;
+    private function addAction(
+        string $action,
+        ListActionTypes $actionType = ListActionTypes::Route,
+        ?\Closure $closure = null,
+        ?string $actionMethod = null
+    ) {
+        throw_if(
+            $actionType == ListActionTypes::Route && is_null($closure),
+            'Needs an anonymous function via $closure parameter receiving an ID and returning the route for targeting.'
+        );
+        throw_if(
+            $actionType == ListActionTypes::Action && is_null($action),
+            'Need the name of a method via the $actionMethod parameter receiving an ID to handle the action of "' . $action . '"'
+        );
+
+        $this->actions[$action] = [
+            'action_type' => $actionType,
+            'closure' => $closure,
+            'action' => $actionMethod
+        ];
         return $this;
     }
 
     /**
-     * Add a action edit
+     * Add show
      *
-     * @param Action|ActionEdit $edit
+     * @param ListActionTypes $actionType
+     * @param \Closure|null $closure
+     * @param string|null $actionMethod
      * @return ListAction
      */
-    function addEdit(Action|ActionEdit $edit)
-    {
-        $this->edit = $edit;
-        return $this;
+    function addShow(
+        ?\Closure $closure = null,
+        ?string $actionMethod = null,
+        ListActionTypes $actionType = ListActionTypes::Route
+    ) {
+        return $this->addAction('show', $actionType, $closure, $actionMethod);
     }
 
     /**
-     * Add a action delete
+     * Add edit
      *
-     * @param Action|ActionDelete $delete
+     * @param ListActionTypes $actionType
+     * @param \Closure|null $closure
+     * @param string|null $actionMethod
      * @return ListAction
      */
-    function addDelete(Action|ActionDelete $delete)
-    {
-        $this->delete = $delete;
-        return $this;
+    function addEdit(
+        ?\Closure $closure = null,
+        ?string $actionMethod = null,
+        ListActionTypes $actionType = ListActionTypes::Route
+    ) {
+        return $this->addAction('edit', $actionType, $closure, $actionMethod);
+    }
+
+    /**
+     * Add delete
+     *
+     * @param ListActionTypes $actionType
+     * @param \Closure|null $closure
+     * @param string|null $actionMethod
+     * @return ListAction
+     */
+    function addDelete(
+        ?\Closure $closure = null,
+        ?string $actionMethod = null,
+        ListActionTypes $actionType = ListActionTypes::OwnAction
+    ) {
+        return $this->addAction('delete', $actionType, $closure, $actionMethod);
     }
 
     /**
      * Get action show
      *
-     * @return null|Action|ActionShow
+     * @return null|array
      */
     function getShow()
     {
-        return $this->show;
+        return $this->actions['show'];
     }
 
     /**
      * Get action edit
      *
-     * @return null|Action|ActionEdit
+     * @return null|array
      */
     function getEdit()
     {
-        return $this->edit;
+        return $this->actions['edit'];
     }
 
     /**
      * Get action delete
      *
-     * @return null|Action|ActionDelete
+     * @return null|array
      */
     function getDelete()
     {
-        return $this->delete;
+        return $this->actions['delete'];
     }
 }

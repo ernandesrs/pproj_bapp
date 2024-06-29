@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Builders\Pages;
 
+use App\Livewire\Builders\Pages\Actions\ListActionTypes;
 use App\Livewire\Builders\Pages\DefaultPage;
 use App\Livewire\Builders\Pages\List\Traits\TraitGetters;
 use App\Livewire\Builders\Pages\List\Traits\TraitSetters;
@@ -57,6 +58,12 @@ class ListPage extends DefaultPage
         return $this;
     }
 
+    /**
+     * Show item
+     *
+     * @param int $id
+     * @return mixed
+     */
     function show(int $id)
     {
         $actionShow = $this->getListActions()->getShow();
@@ -64,8 +71,8 @@ class ListPage extends DefaultPage
             return;
         }
 
-        if ($actionShow->typeIsRoute()) {
-            return $this->redirect(($actionShow->routeClosure)($id), true);
+        if ($actionShow['type'] == ListActionTypes::Route) {
+            return $this->redirect(($actionShow['closure'])($id), true);
         }
     }
 
@@ -82,8 +89,12 @@ class ListPage extends DefaultPage
             return;
         }
 
-        if ($actionEdit->typeIsRoute()) {
-            return $this->redirect(($actionEdit->routeClosure)($id), true);
+        if ($actionEdit['action_type'] == ListActionTypes::Route) {
+            return $this->redirect(($actionEdit['closure'])($id), true);
+        }
+
+        if ($actionEdit['action_type'] == ListActionTypes::Action) {
+            return;
         }
 
         return;
@@ -102,11 +113,15 @@ class ListPage extends DefaultPage
             return;
         }
 
-        if ($actionDelete->typeIsRoute()) {
-            return $this->redirect(($actionDelete->routeClosure)($id), true);
+        if ($actionDelete['action_type'] == ListActionTypes::Route) {
+            return $this->redirect(($actionDelete['closure'])($id), true);
         }
 
-        if ($actionDelete->typeIsOwnAction()) {
+        if ($actionDelete['action_type'] == ListActionTypes::Action) {
+            return;
+        }
+
+        if ($actionDelete['action_type'] == ListActionTypes::OwnAction) {
             $model = $this->getModelInstance()->where("id", $id)->firstOrFail();
             $feedback = $this->feedback()->success("Success on delete.");
             if (!$model->delete()) {
