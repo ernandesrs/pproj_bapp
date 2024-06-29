@@ -2,15 +2,11 @@
 
 namespace App\Livewire\Builders\Pages;
 
-use App\Livewire\Builders\Pages\Edit\Traits\TraitResponse;
-use App\Livewire\Builders\Pages\Edit\Traits\TraitGetters;
-use App\Livewire\Builders\Pages\Edit\Traits\TraitSetters;
+use App\Livewire\Builders\Pages\ModelManager\ModelManager;
 use Illuminate\Database\Eloquent\Model;
 
-class EditPage extends DefaultPage
+class EditPage extends ModelManager
 {
-    use TraitSetters, TraitGetters, TraitResponse;
-
     /**
      * Model
      *
@@ -52,14 +48,6 @@ class EditPage extends DefaultPage
      */
     function validatePageData()
     {
-        if (empty($this->pageModelClass())) {
-            $this->fails[] = 'Override the "pageModelClass()" public method, returning the model class.';
-        }
-
-        if (!is_bool($this->pageModelServiceClass()) && empty($this->pageModelServiceClass())) {
-            $this->fails[] = 'Override the "pageModelServiceClass()" public method, returning the model service class or false.';
-        }
-
         if (empty($this->model)) {
             $this->fails[] = 'Load your model using the Livewire "mount()" public method.    ';
         }

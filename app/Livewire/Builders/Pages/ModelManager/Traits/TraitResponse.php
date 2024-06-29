@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Builders\Pages\Create\Traits;
+namespace App\Livewire\Builders\Pages\ModelManager\Traits;
 
 use Illuminate\Database\Eloquent\Model;
 

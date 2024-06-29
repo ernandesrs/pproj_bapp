@@ -2,15 +2,11 @@
 
 namespace App\Livewire\Builders\Pages;
 
-use App\Livewire\Builders\Pages\Create\Traits\TraitResponse;
-use App\Livewire\Builders\Pages\Create\Traits\TraitGetters;
-use App\Livewire\Builders\Pages\Create\Traits\TraitSetters;
+use App\Livewire\Builders\Pages\ModelManager\ModelManager;
 use Illuminate\Database\Eloquent\Model;
 
-class CreatePage extends DefaultPage
+class CreatePage extends ModelManager
 {
-    use TraitGetters, TraitSetters, TraitResponse;
-
     /**
      * Model
      *
@@ -42,23 +38,5 @@ class CreatePage extends DefaultPage
         );
 
         return $this->responseToCreation($created);
-    }
-
-    /**
-     * Validate page list data
-     *
-     * @return void
-     */
-    function validatePageData()
-    {
-        if (empty($this->pageModelClass())) {
-            $this->fails[] = 'Override the "pageModelClass()" public method, returning the model class.';
-        }
-
-        if (!is_bool($this->pageModelServiceClass()) && empty($this->pageModelServiceClass())) {
-            $this->fails[] = 'Override the "pageModelServiceClass()" public method, returning the model service class or false.';
-        }
-
-        return parent::validatePageData();
     }
 }
