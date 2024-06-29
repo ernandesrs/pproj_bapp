@@ -94,7 +94,7 @@ trait TraitGetters
      */
     function getTitleFromBreadcrumb(): string
     {
-        return count($this->getBreadcrumb()) == 0 ? $this->getTitle() : implode(' » ', array_map(function ($bread) {
+        return count($this->getBreadcrumb(true)) == 0 ? $this->getTitle() : implode(' » ', array_map(function ($bread) {
             return $bread['label'];
         }, $this->getBreadcrumb(true)));
     }
