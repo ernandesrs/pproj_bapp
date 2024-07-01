@@ -3,6 +3,9 @@
 @endphp
 
 <div class="{{ $pageContainerStyle }} w-full min-h-full px-5 {{ $this->typeIsBlank() ? 'py-5' : '' }}">
+    {{-- confirmation modal --}}
+    <x-common.dialogs.confirmation />
+
     {{-- page header --}}
     @if (!$this->typeIsBlank())
         <div class="flex items-center py-3 mb-5">
@@ -28,7 +31,8 @@
                             @endphp
                             @foreach ($breadcrumbs as $key => $bread)
                                 <li>
-                                    <a wire:navigate href="{{ $bread['href'] }}" class="block transition hover:text-gray-700">
+                                    <a wire:navigate href="{{ $bread['href'] }}"
+                                        class="block transition hover:text-gray-700">
                                         <span> {{ $bread['label'] }} </span>
                                     </a>
                                 </li>
@@ -136,13 +140,18 @@
                                         @endif
 
                                         @if ($this->getListActions()->getDelete())
-                                            <x-common.clickable
-                                                type="button"
-                                                wire:click="delete({{ $listItem->id }})"
-                                                wire:confirm="Are you sure you want to delete this item?"
-
-                                                prepend-icon="trash" label="Delete"
-                                                class="bg-red-400 hover:bg-red-500 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
+                                            <x-common.btn-confirmation
+                                                icon="trash"
+                                                label="Delete"
+                                                :action-to-one="true"
+                                                type="danger"
+                                                title="Delete {{ $listItem->first_name . ' ' . $listItem->last_name }}?"
+                                                text="Are you sure you want to delete this user? Confirm to proceed."
+                                                :action="[
+                                                    'name' => 'delete',
+                                                    'id' => $listItem->id,
+                                                ]"
+                                                class="!bg-red-400 hover:!bg-red-500 !text-slate-100 hover:!text-slate-100 text-xs py-1 px-2" />
                                         @endif
                                 @endif
                                 </td>

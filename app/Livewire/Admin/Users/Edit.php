@@ -15,6 +15,24 @@ class Edit extends EditPage
         $this->data = $user->toArray();
     }
 
+    /**
+     * Delete the current model
+     *
+     * @param integer $id
+     * @return void
+     */
+    function delete(int $id)
+    {
+        $feedback = $this->feedback()->success("Success on delete.");
+        if (!$this->model->delete()) {
+            $feedback->error('Fail on delete.');
+        }
+
+        $feedback->flash();
+
+        $this->redirect(route('admin.users.index'), true);
+    }
+
     function pageModelServiceClass()
     {
         return UserService::class;

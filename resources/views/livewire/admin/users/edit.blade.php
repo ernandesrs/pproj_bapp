@@ -20,6 +20,22 @@
                     @include('livewire.admin.includes.user-basic-data')
                 </x-admin.form.base>
             </x-common.content-block>
+
+            <x-common.content-block class="bg-red-400 bg-opacity-20 border border-red-200 px-5 py-3">
+                <div class="text-lg font-medium text-red-500 mb-2">Danger area</div>
+                <x-common.btn-confirmation
+                    icon="trash"
+                    label="Delete this user"
+                    :action-to-one="true"
+                    type="danger"
+                    title="Delete {{ $this->model->first_name . ' ' . $this->model->last_name }}?"
+                    text="Are you sure you want to delete this user? Confirm to proceed."
+                    :action="[
+                        'name' => 'delete',
+                        'id' => $this->model->id,
+                    ]"
+                    class="!bg-red-400 hover:!bg-red-500 !text-slate-100 hover:!text-slate-100 text-xs py-1 px-2" />
+            </x-common.content-block>
         </div>
     </div>
 </x-common.layout.page-base>
