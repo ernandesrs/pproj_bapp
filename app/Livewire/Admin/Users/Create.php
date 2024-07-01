@@ -14,6 +14,11 @@ class Create extends CreatePage
         return fn($user) => $user ? route('admin.users.edit', ['user' => $user->id]) : route('admin.users.index');
     }
 
+    function pageModelPolicyClass()
+    {
+        return \App\Policies\UserPolicy::class;
+    }
+
     function pageModelServiceClass()
     {
         return UserService::class;

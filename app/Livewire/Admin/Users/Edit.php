@@ -33,6 +33,11 @@ class Edit extends EditPage
         $this->redirect(route('admin.users.index'), true);
     }
 
+    function pageModelPolicyClass()
+    {
+        return \App\Policies\UserPolicy::class;
+    }
+
     function pageModelServiceClass()
     {
         return UserService::class;

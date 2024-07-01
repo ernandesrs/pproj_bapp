@@ -25,6 +25,11 @@ class Index extends ListPage
             ->addColumn(__('common/words.email'), 'email');
     }
 
+    function pageModelPolicyClass()
+    {
+        return \App\Policies\UserPolicy::class;
+    }
+
     function pageModelClass()
     {
         return User::class;

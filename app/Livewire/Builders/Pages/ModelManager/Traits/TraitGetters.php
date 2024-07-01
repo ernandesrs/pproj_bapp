@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Livewire\Builders\Pages\ModelManager\Traits;
+use Illuminate\Database\Eloquent\Model;
 
 trait TraitGetters
 {
@@ -12,6 +13,20 @@ trait TraitGetters
     function getModelClass()
     {
         return $this->pageModelClass();
+    }
+
+    /**
+     * Get model instance
+     *
+     * @return null|Model
+     */
+    function getModelInstance()
+    {
+        if ($this->modelInstance instanceof Model) {
+            return $this->modelInstance;
+        }
+
+        return new ($this->pageModelClass())();
     }
 
     /**

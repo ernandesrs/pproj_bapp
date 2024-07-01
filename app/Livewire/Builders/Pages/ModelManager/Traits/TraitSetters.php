@@ -25,6 +25,16 @@ trait TraitSetters
     }
 
     /**
+     * Set page model policy class
+     *
+     * @return null|bool|string
+     */
+    function pageModelPolicyClass()
+    {
+        return null;
+    }
+
+    /**
      * On success redirect
      *
      * @return null|\Closure A function that can receive a Model or null and must return the URL where the user will be redirected in case of success.

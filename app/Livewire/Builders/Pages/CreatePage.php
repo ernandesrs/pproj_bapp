@@ -22,12 +22,30 @@ class CreatePage extends ModelManager
     public array $data = [];
 
     /**
+     * Overwriting render() method to check authorization
+     *
+     * @return void
+     */
+    function render()
+    {
+        if ($this->hasPolicy()) {
+            $this->authorize('create', $this->getModelClass());
+        }
+
+        return parent::render();
+    }
+
+    /**
      * Save data on database
      *
      * @return void
      */
     function save()
     {
+        if ($this->hasPolicy()) {
+            $this->authorize('create', $this->getModelClass());
+        }
+
         $modelService = $this->getModelServiceClass();
         if (!$modelService) {
             return;

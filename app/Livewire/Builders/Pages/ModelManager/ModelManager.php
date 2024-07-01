@@ -12,6 +12,16 @@ class ModelManager extends DefaultPage
     use TraitGetters, TraitSetters, TraitResponse;
 
     /**
+     * Check if has a defined policy class
+     *
+     * @return bool
+     */
+    protected function hasPolicy()
+    {
+        return !is_null($this->pageModelPolicyClass()) && $this->pageModelPolicyClass();
+    }
+
+    /**
      * Validate page list data
      *
      * @return void
@@ -24,6 +34,10 @@ class ModelManager extends DefaultPage
 
         if (!is_bool($this->pageModelServiceClass()) && empty($this->pageModelServiceClass())) {
             $this->fails[] = 'Override the "pageModelServiceClass()" public method, returning the model service class or false.';
+        }
+
+        if (!is_bool($this->pageModelPolicyClass()) && empty($this->pageModelPolicyClass())) {
+            $this->fails[] = 'Override the "pageModelPolicyClass()" public method, returning the model policy class or false.';
         }
 
         return parent::validatePageData();

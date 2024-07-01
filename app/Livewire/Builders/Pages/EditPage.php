@@ -22,12 +22,30 @@ class EditPage extends ModelManager
     public array $data = [];
 
     /**
+     * Overwriting render() method to check authorization
+     *
+     * @return void
+     */
+    function render()
+    {
+        if ($this->hasPolicy()) {
+            $this->authorize('update', $this->model);
+        }
+
+        return parent::render();
+    }
+
+    /**
      * Update model data
      *
      * @return void
      */
     function update()
     {
+        if ($this->hasPolicy()) {
+            $this->authorize('update', $this->model);
+        }
+
         $modelService = $this->getModelServiceClass();
         if (!$modelService) {
             return;

@@ -3,13 +3,13 @@
 namespace App\Livewire\Builders\Pages;
 
 use App\Livewire\Builders\Pages\Actions\ListActionTypes;
-use App\Livewire\Builders\Pages\DefaultPage;
 use App\Livewire\Builders\Pages\List\Traits\TraitGetters;
 use App\Livewire\Builders\Pages\List\Traits\TraitSetters;
+use App\Livewire\Builders\Pages\ModelManager\ModelManager;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\WithPagination;
 
-class ListPage extends DefaultPage
+class ListPage extends ModelManager
 {
     use TraitGetters, TraitSetters, WithPagination;
 
@@ -18,7 +18,7 @@ class ListPage extends DefaultPage
      *
      * @var null|Model
      */
-    private null|Model $modelInstance = null;
+    protected null|Model $modelInstance = null;
 
     /**
      * List items
@@ -35,6 +35,20 @@ class ListPage extends DefaultPage
     function boot()
     {
         $this->type = 'list';
+    }
+
+    /**
+     * Overwriting render() method to check authorization
+     *
+     * @return void
+     */
+    function render()
+    {
+        if ($this->hasPolicy()) {
+            $this->authorize('viewAny', $this->getModelClass());
+        }
+
+        return parent::render();
     }
 
     /**
@@ -123,6 +137,11 @@ class ListPage extends DefaultPage
 
         if ($actionDelete['action_type'] == ListActionTypes::OwnAction) {
             $model = $this->getModelInstance()->where("id", $id)->firstOrFail();
+
+            if ($this->hasPolicy()) {
+                $this->authorize('delete', $model);
+            }
+
             $feedback = $this->feedback()->success(__('admin/phrases.deletions.success_text'));
             if (!$model->delete()) {
                 $feedback->error(__('admin/phrases.deletions.fail_text'));
@@ -130,6 +149,16 @@ class ListPage extends DefaultPage
 
             $feedback->dispatch($this);
         }
+    }
+
+    /**
+     * Set page model service class
+     *
+     * @return bool
+     */
+    function pageModelServiceClass()
+    {
+        return false;
     }
 
     /**

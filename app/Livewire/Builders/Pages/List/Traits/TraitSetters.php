@@ -5,16 +5,6 @@ namespace App\Livewire\Builders\Pages\List\Traits;
 trait TraitSetters
 {
     /**
-     * Set model class
-     *
-     * @return null|string
-     */
-    function pageModelClass()
-    {
-        return null;
-    }
-
-    /**
      * Set list limit
      *
      * @return int

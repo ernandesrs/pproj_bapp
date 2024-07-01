@@ -21,20 +21,6 @@ trait TraitGetters
     }
 
     /**
-     * Get model instance
-     *
-     * @return null|Model
-     */
-    function getModelInstance()
-    {
-        if ($this->modelInstance instanceof Model) {
-            return $this->modelInstance;
-        }
-
-        return new ($this->pageModelClass())();
-    }
-
-    /**
      * Get list limit
      *
      * @return int
