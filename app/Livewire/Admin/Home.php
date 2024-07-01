@@ -8,7 +8,7 @@ class Home extends DefaultPage
 {
     function pageTitle()
     {
-        return 'Overview';
+        return __('common/words.overview');
     }
 
     function pageView()

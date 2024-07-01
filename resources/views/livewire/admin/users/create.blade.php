@@ -1,6 +1,6 @@
 <x-common.layout.page-base>
     <x-common.content-block
-        title="User data"
+        title="{{ __('common/phrases.user_data') }}"
         class="flex justify-center">
 
         <x-admin.form.base

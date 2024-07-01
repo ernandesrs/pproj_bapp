@@ -3,37 +3,37 @@
     <x-admin.form.input
         wire:model="data.first_name"
         type="text"
-        label="First name"
+        label="{{ __('common/words.first_name') }}"
         class="basis-6/12 pr-3" />
 
     <x-admin.form.input
         wire:model="data.last_name"
         type="text"
-        label="Last name"
+        label="{{ __('common/words.last_name') }}"
         class="basis-6/12 pl-3" />
 
     <x-admin.form.input
         wire:model="data.username"
         type="text"
-        label="Username"
+        label="{{ __('common/words.username') }}"
         class="basis-6/12 pr-3" />
 
     <x-admin.form.input
         wire:model="data.gender"
         type="select"
-        label="Gender"
+        label="{{ __('common/words.gender') }}"
         class="basis-6/12 pl-3"
         :options="[
             [
-                'label' => 'None',
+                'label' => __('common/words.none'),
                 'value' => 'n',
             ],
             [
-                'label' => 'Female',
+                'label' => __('common/words.female'),
                 'value' => 'f',
             ],
             [
-                'label' => 'Male',
+                'label' => __('common/words.female'),
                 'value' => 'm',
             ],
         ]" />
@@ -42,26 +42,26 @@
         <x-admin.form.input
             wire:model="data.email"
             type="text"
-            label="Email"
+            label="{{ __('common/words.email') }}"
             class="basis-full" disabled />
     @else
         <x-admin.form.input
             wire:model="data.email"
             type="text"
-            label="Email"
+            label="{{ __('common/words.email') }}"
             class="basis-full" />
     @endif
 
     <x-admin.form.input
         wire:model="data.password"
         type="password"
-        label="Password"
+        label="{{ __('common/words.password') }}"
         class="basis-6/12 pr-3" />
 
     <x-admin.form.input
         wire:model="data.password_confirmation"
         type="password"
-        label="Password confirmation"
+        label="{{ __('common/phrases.password_confirmation') }}"
         class="basis-6/12 pl-3" />
 
 </div>

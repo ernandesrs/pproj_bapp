@@ -1,6 +1,6 @@
 @props([
-    'submitText' => 'Save',
-    'submittingText' => 'Saving',
+    'submitText' => __('common/words.save'),
+    'submittingText' => __('common/words.saving'),
     'submitTo' => null,
 ])
 

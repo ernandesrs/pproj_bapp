@@ -51,12 +51,12 @@
                     'permissions' => null,
                 ],
                 [
-                    'label' => 'Users',
+                    'label' => __('common/words.users'),
                     'icon' => 'people-fill',
                     'activeIn' => ['admin.users.index', 'admin.users.create', 'admin.users.edit'],
                     'items' => [
                         [
-                            'label' => 'List all',
+                            'label' => __('common/words.list') . ' ' . strtolower(__('common/words.all')),
                             'icon' => 'list-nested',
                             'href' => '#',
                             'route' => [
@@ -66,7 +66,7 @@
                             'permissions' => null,
                         ],
                         [
-                            'label' => 'Create',
+                            'label' => __('common/words.create') . ' ' . strtolower(__('common/words.new')),
                             'icon' => 'person-fill-add',
                             'href' => '#',
                             'route' => [
@@ -78,7 +78,7 @@
                     ],
                 ],
                 [
-                    'label' => 'Roles',
+                    'label' => __('common/words.roles'),
                     'icon' => 'shield-fill',
                     'href' => '#',
                 ],
@@ -88,7 +88,7 @@
         $sidebarEndNavs = [
             [
                 [
-                    'label' => 'Account',
+                    'label' => __('common/words.my_f') . ' ' . strtolower(__('common/words.account')),
                     'icon' => 'person-circle',
                     'href' => '#',
                     'route' => [
@@ -98,7 +98,7 @@
                     'permissions' => null,
                 ],
                 [
-                    'label' => 'Settings',
+                    'label' => __('common/words.settings'),
                     'icon' => 'gear-fill',
                     'href' => '#',
                     'activeIn' => [],

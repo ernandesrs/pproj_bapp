@@ -27,13 +27,13 @@ class Create extends CreatePage
     function pageBreadcrumb()
     {
         return (new Breadcrumb)
-            ->addItem('Users', 'people-fill', route('admin.users.index'))
-            ->addItem('Create', 'person-fill-add', route('admin.users.create'));
+            ->addItem(__('common/words.users'), 'people-fill', route('admin.users.index'))
+            ->addItem(__('common/words.create') . ' ' . strtolower(__('common/words.user')), 'person-fill-add', route('admin.users.create'));
     }
 
     function pageTitle()
     {
-        return 'Create user';
+        return __('common/words.create') . ' ' . strtolower(__('common/words.user'));
     }
 
     function pageIcon()

@@ -20,9 +20,9 @@ class Index extends ListPage
     {
         return (new Table)
             ->addColumn('ID', 'id')
-            ->addColumn('Name', null, fn($user) => $user->first_name . ' ' . $user->last_name)
-            ->addColumn('Status', null, null, 'livewire.admin.users.includes.status')
-            ->addColumn('E-mail', 'email');
+            ->addColumn(__('common/words.name'), null, fn($user) => $user->first_name . ' ' . $user->last_name)
+            ->addColumn(__('common/words.status'), null, null, 'livewire.admin.users.includes.status')
+            ->addColumn(__('common/words.email'), 'email');
     }
 
     function pageModelClass()
@@ -33,18 +33,18 @@ class Index extends ListPage
     function pageActions()
     {
         return (new \App\Livewire\Builders\Pages\Actions\PageAction)
-            ->addAction('New user', route('admin.users.create'), 'person-fill-add');
+            ->addAction(__('common/words.new') . ' ' . strtolower(__('common/words.user')), route('admin.users.create'), 'person-fill-add');
     }
 
     function pageBreadcrumb()
     {
         return (new Breadcrumb)
-            ->addItem('Users', 'people-fill', route('admin.users.index'));
+            ->addItem(__('common/words.users'), 'people-fill', route('admin.users.index'));
     }
 
     function pageTitle()
     {
-        return 'Users';
+        return __('common/words.users');
     }
 
     function pageIcon()

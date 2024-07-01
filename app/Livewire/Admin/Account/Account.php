@@ -24,11 +24,11 @@ class Account extends DefaultPage
 
     function pageTitle()
     {
-        return 'My Account';
+        return __('common/words.my_f') . ' ' . strtolower(__('common/words.account'));
     }
 
     function pageBreadcrumb()
     {
-        return (new Breadcrumb)->addItem('My Account', 'app', route('admin.account'));
+        return (new Breadcrumb)->addItem(__('common/words.my_f') . ' ' . strtolower(__('common/words.account')), 'app', route('admin.account'));
     }
 }

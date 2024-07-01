@@ -2,7 +2,7 @@
     <div class="flex flex-wrap">
         <div class="basis-full md:basis-4/12 mb-6 md:mb-0 md:pr-2 flex justify-center">
             <x-common.content-block
-                title="User picture"
+                title="{{ __('common/phrases.user_picture') }}"
                 class="flex justify-center">
                 <x-admin.thumb
                     circle
@@ -14,7 +14,7 @@
 
         <div class="basis-full md:basis-8/12 md:pl-2">
             <x-common.content-block
-                title="User data">
+                title="{{ __('common/phrases.user_data') }}">
                 <x-admin.form.base
                     submitTo="update">
                     @include('livewire.admin.includes.user-basic-data')
@@ -22,7 +22,7 @@
             </x-common.content-block>
 
             <x-common.content-block class="bg-red-400 bg-opacity-20 border border-red-200 px-5 py-3">
-                <div class="text-lg font-medium text-red-500 mb-2">Danger area</div>
+                <div class="text-lg font-medium text-red-500 mb-2">{{ __('common/phrases.danger_area') }}</div>
                 <x-common.btn-confirmation
                     icon="trash"
                     label="{{ __('common/words.delete') . ' ' . strtolower(__('common/words.user')) }}"

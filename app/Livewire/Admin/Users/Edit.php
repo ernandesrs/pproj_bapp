@@ -46,13 +46,13 @@ class Edit extends EditPage
     function pageBreadcrumb()
     {
         return (new Breadcrumb)
-            ->addItem('Users', 'people-fill', route('admin.users.index'))
-            ->addItem('Edit user', 'person-fill-gear', route('admin.users.edit', ['user' => $this->model->id]));
+            ->addItem(__('common/words.users'), 'people-fill', route('admin.users.index'))
+            ->addItem(__('common/words.edit') . ' ' . strtolower(__('common/words.user')), 'person-fill-gear', route('admin.users.edit', ['user' => $this->model->id]));
     }
 
     function pageTitle()
     {
-        return 'Edit user';
+        return __('common/words.edit') . ' ' . strtolower(__('common/words.user'));
     }
 
     function pageIcon()
