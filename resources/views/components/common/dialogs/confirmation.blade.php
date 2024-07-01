@@ -119,25 +119,25 @@ preparado para receber os dados e disparar o evento que acionará este modal. Vi
         {{-- title --}}
         <div
             class="text-lg font-medium text-gray-700"
-            x-text="data.title"></div>
+            x-html="data.title"></div>
 
         {{-- message --}}
         <div
             class="mt-2 mb-5 text-gray-600"
-            x-text="data.text"></div>
+            x-html="data.text"></div>
 
         {{-- buttons --}}
         <div class="flex items-center justify-end gap-x-2">
             <x-common.clickable
                 class="!bg-gray-100 hover:!bg-gray-200 text-sm"
-                label="Cancel"
+                label="{{ __('common/words.cancel') }}"
                 prepend-icon="x-circle"
                 x-on:click="method_cancel"
                 wire:loading.attr="disabled"
                 wire:loading.class="opacity-25" />
 
             <x-common.clickable
-                label="Confirm"
+                label="{{ __('common/words.confirm') }}"
                 prepend-icon="check-circle"
                 class="text-sm text-gray-100 !bg-gray-500 hover:!bg-gray-600"
                 x-show="confirmationType == 'default'"
@@ -146,7 +146,7 @@ preparado para receber os dados e disparar o evento que acionará este modal. Vi
                 wire:loading.class="animate-pulse" />
 
             <x-common.clickable
-                label="Confirm"
+                label="{{ __('common/words.confirm') }}"
                 prepend-icon="check-circle"
                 class="text-sm text-gray-100 !bg-emerald-500 hover:!bg-emerald-600"
                 x-show="confirmationType == 'success'"
@@ -155,7 +155,7 @@ preparado para receber os dados e disparar o evento que acionará este modal. Vi
                 wire:loading.class="animate-pulse" />
 
             <x-common.clickable
-                label="Confirm"
+                label="{{ __('common/words.confirm') }}"
                 prepend-icon="check-circle"
                 class="text-sm text-gray-100 hover:!text-gray-200 !bg-red-400 hover:!bg-red-500"
                 x-show="confirmationType == 'danger'"
@@ -164,7 +164,7 @@ preparado para receber os dados e disparar o evento que acionará este modal. Vi
                 wire:loading.class="animate-pulse" />
 
             <x-common.clickable
-                label="Confirm"
+                label="{{ __('common/words.confirm') }}"
                 prepend-icon="check-circle"
                 class="text-sm text-gray-100 hover:!text-gray-200 !bg-orange-400 hover:!bg-orange-500"
                 x-show="confirmationType == 'warning'"
@@ -173,7 +173,7 @@ preparado para receber os dados e disparar o evento que acionará este modal. Vi
                 wire:loading.class="animate-pulse" />
 
             <x-common.clickable
-                label="Confirm"
+                label="{{ __('common/words.confirm') }}"
                 prepend-icon="check-circle"
                 class="text-sm text-gray-100 hover:!text-gray-200 !bg-sky-500 hover:!bg-sky-600"
                 x-show="confirmationType == 'info'"

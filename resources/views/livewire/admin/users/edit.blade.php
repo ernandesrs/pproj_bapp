@@ -25,11 +25,11 @@
                 <div class="text-lg font-medium text-red-500 mb-2">Danger area</div>
                 <x-common.btn-confirmation
                     icon="trash"
-                    label="Delete this user"
+                    label="{{ __('common/words.delete') . ' ' . strtolower(__('common/words.user')) }}"
                     :action-to-one="true"
                     type="danger"
-                    title="Delete {{ $this->model->first_name . ' ' . $this->model->last_name }}?"
-                    text="Are you sure you want to delete this user? Confirm to proceed."
+                    title="{{ __('admin/phrases.confirmation.deletion_title', ['itemName' => strtolower(__('admin/phrases.this_item'))]) }}"
+                    text="{{ __('admin/phrases.confirmation.deletion_text', ['itemName' => $this->model->first_name . ' ' . $this->model->last_name]) }}"
                     :action="[
                         'name' => 'delete',
                         'id' => $this->model->id,

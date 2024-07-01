@@ -87,7 +87,7 @@
                                 <th class="px-8 py-3">{{ $label['label'] }}</th>
                             @endforeach
                             @if ($this->getListActions())
-                                <th>Actions</th>
+                                <th>{{ __('common/words.actions') }}</th>
                             @endif
                         </tr>
                     </thead>
@@ -126,7 +126,7 @@
                                                 type="button"
                                                 wire:click="show({{ $listItem->id }})"
 
-                                                prepend-icon="eye" label="Show"
+                                                prepend-icon="eye" label="{{ __('common/words.show') }}"
                                                 class="bg-indigo-500 hover:bg-indigo-600 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
                                         @endif
 
@@ -135,18 +135,18 @@
                                                 type="button"
                                                 wire:click="edit({{ $listItem->id }})"
 
-                                                prepend-icon="pencil" label="Edit"
+                                                prepend-icon="pencil" label="{{ __('common/words.edit') }}"
                                                 class="bg-blue-500 hover:bg-blue-600 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
                                         @endif
 
                                         @if ($this->getListActions()->getDelete())
                                             <x-common.btn-confirmation
                                                 icon="trash"
-                                                label="Delete"
+                                                label="{{ __('common/words.delete') }}"
                                                 :action-to-one="true"
                                                 type="danger"
-                                                title="Delete {{ $listItem->first_name . ' ' . $listItem->last_name }}?"
-                                                text="Are you sure you want to delete this user? Confirm to proceed."
+                                                title="{{ __('admin/phrases.confirmation.deletion_title', ['itemName' => strtolower(__('admin/phrases.this_item'))]) }}"
+                                                text="{{ __('admin/phrases.confirmation.deletion_text', ['itemName' => strtolower(__('admin/phrases.this_item'))]) }}"
                                                 :action="[
                                                     'name' => 'delete',
                                                     'id' => $listItem->id,
