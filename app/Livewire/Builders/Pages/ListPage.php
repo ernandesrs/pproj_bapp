@@ -123,9 +123,9 @@ class ListPage extends DefaultPage
 
         if ($actionDelete['action_type'] == ListActionTypes::OwnAction) {
             $model = $this->getModelInstance()->where("id", $id)->firstOrFail();
-            $feedback = $this->feedback()->success("Success on delete.");
+            $feedback = $this->feedback()->success(__('admin/phrases.deletions.success_text'));
             if (!$model->delete()) {
-                $feedback->error('Fail on delete.');
+                $feedback->error(__('admin/phrases.deletions.fail_text'));
             }
 
             $feedback->dispatch($this);

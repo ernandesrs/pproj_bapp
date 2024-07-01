@@ -10,13 +10,14 @@ trait TraitResponse
      * Response
      *
      * @param Model|null $model
+     * @param bool $creating
      * @return void
      */
-    function response(?Model $model)
+    function response(?Model $model, bool $creating = true)
     {
         $feedback = $this->feedback();
         if ($model) {
-            $feedback->success('Created with success!');
+            $feedback->success($creating ? __('admin/phrases.registrations.success_text') : __('admin/phrases.updates.success_text'));
 
             if ($this->getOnSuccessRedirect()) {
                 $feedback->flash();
@@ -27,7 +28,7 @@ trait TraitResponse
             }
         }
 
-        $feedback->error('Fail on create!');
+        $feedback->error($creating ? __('admin/phrases.registrations.fail_text') : __('admin/phrases.updates.fail_text'));
         if ($this->getOnFailRedirect()) {
             $feedback->flash();
             return $this->redirect(($this->getOnFailRedirect())($model), true);
@@ -55,6 +56,6 @@ trait TraitResponse
      */
     function responseToUpdate(?Model $editedModel)
     {
-        return $this->response($editedModel);
+        return $this->response($editedModel, false);
     }
 }

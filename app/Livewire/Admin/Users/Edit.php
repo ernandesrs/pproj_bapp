@@ -23,9 +23,9 @@ class Edit extends EditPage
      */
     function delete(int $id)
     {
-        $feedback = $this->feedback()->success("Success on delete.");
+        $feedback = $this->feedback()->success(__('admin/phrases.deletions.success_text'));
         if (!$this->model->delete()) {
-            $feedback->error('Fail on delete.');
+            $feedback->error(__('admin/phrases.deletions.fail_text'));
         }
 
         $feedback->flash();
