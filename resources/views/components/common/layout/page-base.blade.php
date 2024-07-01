@@ -63,11 +63,13 @@
             @if ($this->hasActions())
                 <div class="flex items-center ml-auto">
                     @foreach ($this->getActions()->getActions() as $action)
-                        <x-common.clickable
-                            prepend-icon="{{ $action['icon'] }}"
-                            label="{{ $action['label'] }}"
-                            href="{{ $action['href'] }}"
-                            color="{{ $action['color'] }}" />
+                        @if ($action['show'])
+                            <x-common.clickable
+                                prepend-icon="{{ $action['icon'] }}"
+                                label="{{ $action['label'] }}"
+                                href="{{ $action['href'] }}"
+                                color="{{ $action['color'] }}" />
+                        @endif
                     @endforeach
                 </div>
             @endif
@@ -122,36 +124,42 @@
                                 @if ($this->getListActions())
                                     <td class="px-8 py-2 align-middle flex flex-wrap justify-start items-center gap-1">
                                         @if ($this->getListActions()->getShow())
-                                            <x-common.clickable
-                                                type="button"
-                                                wire:click="show({{ $listItem->id }})"
+                                            @can('show', $this->getModelClass())
+                                                <x-common.clickable
+                                                    type="button"
+                                                    wire:click="show({{ $listItem->id }})"
 
-                                                prepend-icon="eye" label="{{ __('common/words.show') }}"
-                                                class="bg-indigo-500 hover:bg-indigo-600 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
+                                                    prepend-icon="eye" label="{{ __('common/words.show') }}"
+                                                    class="bg-indigo-500 hover:bg-indigo-600 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
+                                            @endcan
                                         @endif
 
                                         @if ($this->getListActions()->getEdit())
-                                            <x-common.clickable
-                                                type="button"
-                                                wire:click="edit({{ $listItem->id }})"
+                                            @can('update', $listItem)
+                                                <x-common.clickable
+                                                    type="button"
+                                                    wire:click="edit({{ $listItem->id }})"
 
-                                                prepend-icon="pencil" label="{{ __('common/words.edit') }}"
-                                                class="bg-blue-500 hover:bg-blue-600 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
+                                                    prepend-icon="pencil" label="{{ __('common/words.edit') }}"
+                                                    class="bg-blue-500 hover:bg-blue-600 text-slate-100 hover:text-slate-100 text-xs py-1 px-2" />
+                                            @endcan
                                         @endif
 
                                         @if ($this->getListActions()->getDelete())
-                                            <x-common.btn-confirmation
-                                                icon="trash"
-                                                label="{{ __('common/words.delete') }}"
-                                                :action-to-one="true"
-                                                type="danger"
-                                                title="{{ __('admin/phrases.confirmation.deletion_title', ['itemName' => strtolower(__('admin/phrases.this_item'))]) }}"
-                                                text="{{ __('admin/phrases.confirmation.deletion_text', ['itemName' => strtolower(__('admin/phrases.this_item'))]) }}"
-                                                :action="[
-                                                    'name' => 'delete',
-                                                    'id' => $listItem->id,
-                                                ]"
-                                                class="!bg-red-400 hover:!bg-red-500 !text-slate-100 hover:!text-slate-100 text-xs py-1 px-2" />
+                                            @can('delete', $listItem)
+                                                <x-common.btn-confirmation
+                                                    icon="trash"
+                                                    label="{{ __('common/words.delete') }}"
+                                                    :action-to-one="true"
+                                                    type="danger"
+                                                    title="{{ __('admin/phrases.confirmation.deletion_title', ['itemName' => strtolower(__('admin/phrases.this_item'))]) }}"
+                                                    text="{{ __('admin/phrases.confirmation.deletion_text', ['itemName' => strtolower(__('admin/phrases.this_item'))]) }}"
+                                                    :action="[
+                                                        'name' => 'delete',
+                                                        'id' => $listItem->id,
+                                                    ]"
+                                                    class="!bg-red-400 hover:!bg-red-500 !text-slate-100 hover:!text-slate-100 text-xs py-1 px-2" />
+                                            @endcan
                                         @endif
                                 @endif
                                 </td>

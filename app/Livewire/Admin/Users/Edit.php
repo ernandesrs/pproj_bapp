@@ -33,6 +33,12 @@ class Edit extends EditPage
         $this->redirect(route('admin.users.index'), true);
     }
 
+    function pageActions()
+    {
+        return (new \App\Livewire\Builders\Pages\Actions\PageAction)
+            ->addAction(__('common/words.new') . ' ' . strtolower(__('common/words.user')), route('admin.users.create'), 'person-fill-add', 'primary', \Auth::user()->can('create', $this->getModelClass()));
+    }
+
     function pageModelPolicyClass()
     {
         return \App\Policies\UserPolicy::class;

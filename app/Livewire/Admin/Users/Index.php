@@ -38,7 +38,7 @@ class Index extends ListPage
     function pageActions()
     {
         return (new \App\Livewire\Builders\Pages\Actions\PageAction)
-            ->addAction(__('common/words.new') . ' ' . strtolower(__('common/words.user')), route('admin.users.create'), 'person-fill-add');
+            ->addAction(__('common/words.new') . ' ' . strtolower(__('common/words.user')), route('admin.users.create'), 'person-fill-add', 'primary', \Auth::user()->can('create', $this->getModelClass()));
     }
 
     function pageBreadcrumb()
